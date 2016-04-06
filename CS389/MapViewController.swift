@@ -26,6 +26,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var destination: MKMapItem = MKMapItem()
     
     var address: String = ""
+    var annotation = MKPointAnnotation()
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,13 +129,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func addPin(){
         
+        let overlays = self.mapView.overlays
+        self.mapView.removeOverlays(overlays)
+        
         let location = locationManager.location
-        let annotation = MKPointAnnotation()
+        
         
         locationManager.startUpdatingLocation()
         
         // Turn phone location into coordinates
         let locCoord = CLLocationCoordinate2DMake(location!.coordinate.latitude, location!.coordinate.longitude)
+        
+        self.mapView.removeAnnotations(mapView.annotations)
         
         annotation.coordinate = locCoord
         annotation.title = "Mutirão"
@@ -181,8 +187,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
     }
-
-
     
     
    //MARK: -Mapkit Delegate methods
@@ -268,6 +272,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             }
             pinView!.animatesDrop = true
             pinView!.canShowCallout = true
+            pinView!.rightCalloutAccessoryView = UIButton(type: .InfoDark)
             
             
         }
@@ -277,4 +282,43 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
-}
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        let optionMenu = UIAlertController(title: nil, message: address, preferredStyle: .ActionSheet)
+        
+        
+        let deleteAction = UIAlertAction(title: "Remove Pin", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            self.mapView.removeAnnotation(self.annotation)
+            
+            
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+        })
+        
+        
+        
+        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(cancelAction)
+        
+        self.presentViewController(optionMenu, animated: true, completion: nil)
+        
+        
+    }
+
+    
+  
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        
+        print("pin pressed")
+        
+    }
+
+    
+    
+    }
