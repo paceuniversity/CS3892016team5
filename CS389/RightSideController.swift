@@ -28,9 +28,11 @@ class RightSideController: UITableViewController{
         
     }
   
-    /*
+    
+    
     
     //MARK: - Tableview delegate methods
+
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         
@@ -43,7 +45,7 @@ class RightSideController: UITableViewController{
     }
     
     
-    */
+ 
     
     
     
