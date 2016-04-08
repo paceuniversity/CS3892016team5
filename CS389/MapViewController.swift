@@ -34,14 +34,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.delegate = self
         locationManager.delegate = self
         
-        locationManager.requestWhenInUseAuthorization()
-        
-        locationManager.startUpdatingLocation()
         
         self.mapView.showsUserLocation = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        mapView.showsUserLocation = true
         mapView.showsPointsOfInterest = true
         if #available(iOS 9.0, *) {
             mapView.showsCompass = true
@@ -51,6 +47,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
 
 
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        locationManager.requestWhenInUseAuthorization()
+        
+        locationManager.startUpdatingLocation()
+
+        
+        
     }
     
     
