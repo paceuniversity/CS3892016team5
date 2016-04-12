@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1315B393DEBC37A0A83904BD /* Pods_CS389.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0C9A57D26553C4776B101E8 /* Pods_CS389.framework */; };
 		3413DF801C8F817A00518B94 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3413DF7F1C8F817A00518B94 /* MapViewController.swift */; };
 		3437CDF31CA9B30100AA80E2 /* RightSideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3437CDF21CA9B30100AA80E2 /* RightSideController.swift */; };
 		3437CDF51CAA05C200AA80E2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3437CDF41CAA05C200AA80E2 /* MapKit.framework */; };
@@ -18,9 +17,11 @@
 		34E9FA1A1C8E0E7B0067F058 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34E9FA191C8E0E7B0067F058 /* Assets.xcassets */; };
 		34E9FA1D1C8E0E7B0067F058 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34E9FA1B1C8E0E7B0067F058 /* LaunchScreen.storyboard */; };
 		34F2442D1CA1EB590011B33E /* AboutMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F2442C1CA1EB590011B33E /* AboutMenuController.swift */; };
+		428E325AF4BCA787D660A370 /* Pods_CS389.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27194A828FB68A01BBFD2C98 /* Pods_CS389.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		27194A828FB68A01BBFD2C98 /* Pods_CS389.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CS389.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3413DF7F1C8F817A00518B94 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		3437CDF21CA9B30100AA80E2 /* RightSideController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightSideController.swift; sourceTree = "<group>"; };
 		3437CDF41CAA05C200AA80E2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -34,8 +35,8 @@
 		34E9FA1E1C8E0E7B0067F058 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34F2442C1CA1EB590011B33E /* AboutMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutMenuController.swift; sourceTree = "<group>"; };
 		4DBE8A01916A82FD841A8934 /* Pods-CS389.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS389.release.xcconfig"; path = "Pods/Target Support Files/Pods-CS389/Pods-CS389.release.xcconfig"; sourceTree = "<group>"; };
+		890C15BC1CBCB343001EA119 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9445DE979F2609CCE61168C4 /* Pods-CS389.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS389.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CS389/Pods-CS389.debug.xcconfig"; sourceTree = "<group>"; };
-		B0C9A57D26553C4776B101E8 /* Pods_CS389.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CS389.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +45,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3437CDF51CAA05C200AA80E2 /* MapKit.framework in Frameworks */,
-				1315B393DEBC37A0A83904BD /* Pods_CS389.framework in Frameworks */,
+				428E325AF4BCA787D660A370 /* Pods_CS389.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,7 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				3437CDF41CAA05C200AA80E2 /* MapKit.framework */,
-				B0C9A57D26553C4776B101E8 /* Pods_CS389.framework */,
+				27194A828FB68A01BBFD2C98 /* Pods_CS389.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -63,6 +64,7 @@
 		34E9FA061C8E0E7B0067F058 = {
 			isa = PBXGroup;
 			children = (
+				890C15BC1CBCB343001EA119 /* Podfile */,
 				34E9FA111C8E0E7B0067F058 /* CS389 */,
 				34E9FA101C8E0E7B0067F058 /* Products */,
 				CE275632048014A23129B3C3 /* Pods */,
@@ -117,6 +119,7 @@
 				34E9FA0D1C8E0E7B0067F058 /* Resources */,
 				1B4466A8689CAC3C8E83C17D /* Embed Pods Frameworks */,
 				40CC055116B7E793103A5F4F /* Copy Pods Resources */,
+				89670E8E1CB6ED62001F1841 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -139,6 +142,7 @@
 				TargetAttributes = {
 					34E9FA0E1C8E0E7B0067F058 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 3H975WMNA2;
 					};
 				};
 			};
@@ -218,6 +222,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CS389/Pods-CS389-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		89670E8E1CB6ED62001F1841 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" a24010471ef27a141f9cd6fe966e0b491745bca2 a31733646b6c0489cc5c633139e935eace770e1519c23f650d7637d7a7f09a8d";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -343,11 +360,14 @@
 			baseConfigurationReference = 9445DE979F2609CCE61168C4 /* Pods-CS389.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ian Carvalho (75YHW3D84T)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ian Carvalho (75YHW3D84T)";
 				INFOPLIST_FILE = CS389/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Lazimi.CS389;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mutirao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c5ef4a4f-be4f-4b28-ab86-a2c8e0065e30";
 			};
 			name = Debug;
 		};
@@ -356,11 +376,14 @@
 			baseConfigurationReference = 4DBE8A01916A82FD841A8934 /* Pods-CS389.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ian Carvalho (75YHW3D84T)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ian Carvalho (75YHW3D84T)";
 				INFOPLIST_FILE = CS389/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Lazimi.CS389;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mutirao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c5ef4a4f-be4f-4b28-ab86-a2c8e0065e30";
 			};
 			name = Release;
 		};

@@ -26,13 +26,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         passwordBox.delegate = self
         userNameBox.delegate = self
-        
-
-        
-        
-    
-        
-        
     }
     
     override func viewDidDisappear(animated: Bool) {

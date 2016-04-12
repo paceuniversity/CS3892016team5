@@ -85,12 +85,14 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-CS389/ExpandingMenu.framework"
+  install_framework "Pods-CS389/Firebase.framework"
   install_framework "Pods-CS389/PureLayout.framework"
   install_framework "Pods-CS389/SideMenu.framework"
   install_framework "Pods-CS389/SwiftyButton.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-CS389/ExpandingMenu.framework"
+  install_framework "Pods-CS389/Firebase.framework"
   install_framework "Pods-CS389/PureLayout.framework"
   install_framework "Pods-CS389/SideMenu.framework"
   install_framework "Pods-CS389/SwiftyButton.framework"
