@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1315B393DEBC37A0A83904BD /* Pods_CS389.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0C9A57D26553C4776B101E8 /* Pods_CS389.framework */; };
+		34047F601CBDDD7500E1930E /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34047F5F1CBDDD7500E1930E /* Singleton.swift */; };
 		3413DF801C8F817A00518B94 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3413DF7F1C8F817A00518B94 /* MapViewController.swift */; };
 		3437CDF31CA9B30100AA80E2 /* RightSideController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3437CDF21CA9B30100AA80E2 /* RightSideController.swift */; };
 		3437CDF51CAA05C200AA80E2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3437CDF41CAA05C200AA80E2 /* MapKit.framework */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		34047F5F1CBDDD7500E1930E /* Singleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		3413DF7F1C8F817A00518B94 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		3437CDF21CA9B30100AA80E2 /* RightSideController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightSideController.swift; sourceTree = "<group>"; };
 		3437CDF41CAA05C200AA80E2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -87,6 +89,7 @@
 				34F2442C1CA1EB590011B33E /* AboutMenuController.swift */,
 				34E9FA161C8E0E7B0067F058 /* Main.storyboard */,
 				3437CDF21CA9B30100AA80E2 /* RightSideController.swift */,
+				34047F5F1CBDDD7500E1930E /* Singleton.swift */,
 				3413DF7F1C8F817A00518B94 /* MapViewController.swift */,
 				34E9FA191C8E0E7B0067F058 /* Assets.xcassets */,
 				34E9FA1B1C8E0E7B0067F058 /* LaunchScreen.storyboard */,
@@ -227,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34E9FA151C8E0E7B0067F058 /* ViewController.swift in Sources */,
+				34047F601CBDDD7500E1930E /* Singleton.swift in Sources */,
 				34E9FA131C8E0E7B0067F058 /* AppDelegate.swift in Sources */,
 				3413DF801C8F817A00518B94 /* MapViewController.swift in Sources */,
 				34F2442D1CA1EB590011B33E /* AboutMenuController.swift in Sources */,

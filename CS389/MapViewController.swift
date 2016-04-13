@@ -12,7 +12,7 @@ import MapKit
 //CocoaPods-------
 import SideMenu
 import ExpandingMenu
-//------------------
+//---------------
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
@@ -22,14 +22,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     var locationManager = CLLocationManager()
-    var myPosition = CLLocationCoordinate2D()
-    var destination: MKMapItem = MKMapItem()
     
     var address: String = ""
     var annotation = MKPointAnnotation()
+    
+    var sharedInstance: Singleton!
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        sharedInstance = Singleton.sharedInstance
         
         mapView.delegate = self
         locationManager.delegate = self
@@ -40,7 +42,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.requestWhenInUseAuthorization()
         
         locationManager.startUpdatingLocation()
-        
         
 
     
@@ -152,6 +153,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.startUpdatingLocation()
         
         // Turn phone location into coordinates
+        if location != nil {
         let locCoord = CLLocationCoordinate2DMake(location!.coordinate.latitude, location!.coordinate.longitude)
         
         self.mapView.removeAnnotations(mapView.annotations)
@@ -164,10 +166,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     //    destination = MKMapItem(placemark: placeMark)
         
         
-        if location != nil{
+        
         self.mapView.addAnnotation(annotation)
         }
         
+        // Add string to global array
+        sharedInstance.eventsArray.append(address)
         
         locationManager.stopUpdatingLocation()
         
@@ -213,6 +217,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         //Reverse geocode function- complete
         
+        if location != nil{
         CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)->Void in
             if error == nil && placemarks!.count > 0 {
                 placemark = placemarks![0] as CLPlacemark
@@ -236,7 +241,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                         self.address = self.address + placemark.country!
                     }
             }
+        
         })
+            
+        }
         
         
         let center = CLLocationCoordinate2DMake(location!.coordinate.latitude, location!.coordinate.longitude)
@@ -306,6 +314,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             (alert: UIAlertAction!) -> Void in
             
             self.mapView.removeAnnotation(self.annotation)
+
             
             
         })

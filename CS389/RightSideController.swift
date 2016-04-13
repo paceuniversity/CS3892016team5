@@ -27,7 +27,15 @@ class RightSideController: UITableViewController{
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        if Singleton.sharedInstance.eventsArray.isEmpty == false{
+        return Singleton.sharedInstance.eventsArray.count
+    }
+        else {
+            
+         return 0
+            
+        }
+        
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -42,6 +50,7 @@ class RightSideController: UITableViewController{
             
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
         }
+        
         
         return cell 
         
@@ -63,6 +72,8 @@ class RightSideController: UITableViewController{
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             
             // Fill this part in to delete an event
+            Singleton.sharedInstance.eventsArray.removeAtIndex(indexPath.row)
+            rightTableView.reloadData()
             
             
         }

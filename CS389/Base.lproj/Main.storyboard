@@ -286,10 +286,10 @@
             </objects>
             <point key="canvasLocation" x="6533.5" y="582.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile-->
         <scene sceneID="DoG-dm-ztt">
             <objects>
-                <viewController id="BHU-vA-DlF" sceneMemberID="viewController">
+                <viewController title="Profile" id="BHU-vA-DlF" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="J2C-Cl-4e3"/>
                         <viewControllerLayoutGuide type="bottom" id="wT4-H5-GrR"/>

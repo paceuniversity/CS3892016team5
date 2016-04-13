@@ -17,7 +17,6 @@ class AboutMenu: UIViewController{
         super.viewDidLoad()
         
         
-     //   self.navigationItem.backBarButtonItem?.tintColor = UIColor.whiteColor()
         
         
         
