@@ -305,10 +305,10 @@
             </objects>
             <point key="canvasLocation" x="7051.5" y="109.5"/>
         </scene>
-        <!--About Menu-->
+        <!--About-->
         <scene sceneID="Jb8-Gu-Jjy">
             <objects>
-                <viewController id="iq1-1d-gxf" customClass="AboutMenu" customModule="CS389" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="About" id="iq1-1d-gxf" customClass="AboutMenu" customModule="CS389" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uep-kN-spX"/>
                         <viewControllerLayoutGuide type="bottom" id="Dju-7e-gUh"/>
@@ -341,13 +341,33 @@
         <!--Events-->
         <scene sceneID="cp7-bi-MaQ">
             <objects>
-                <tableViewController id="xeM-p0-mc8" customClass="RightSideController" customModule="CS389" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Events" id="xeM-p0-mc8" customClass="RightSideController" customModule="CS389" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="f0H-84-l1U">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.70196078429999997" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" textLabel="MgS-Ix-m4W" style="IBUITableViewCellStyleDefault" id="Bgd-yK-gFZ">
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bgd-yK-gFZ" id="ov2-4u-GTI">
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MgS-Ix-m4W">
+                                            <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="16"/>
+                                            <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableViewCell>
+                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="xeM-p0-mc8" id="CTm-wu-GfC"/>
                             <outlet property="delegate" destination="xeM-p0-mc8" id="wyx-GT-4ep"/>

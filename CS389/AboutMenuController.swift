@@ -23,11 +23,6 @@ class AboutMenu: UIViewController{
         
         
     }
-    
-    
-    
-    
-    
-    
+
     
 }

@@ -17,7 +17,7 @@ class LeftSideController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.sideTableView.contentInset.top = self.view.frame.height / 4
+     //   self.sideTableView.contentInset.top = self.view.frame.height / 4
 
         self.sideTableView.delegate = self
         self.sideTableView.dataSource = self

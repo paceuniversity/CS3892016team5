@@ -36,6 +36,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         mapView.showsUserLocation = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        locationManager.requestWhenInUseAuthorization()
+        
+        locationManager.startUpdatingLocation()
+        
+        
+
     
         
         mapView.showsPointsOfInterest = true
@@ -52,12 +59,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        locationManager.requestWhenInUseAuthorization()
-        
-        locationManager.startUpdatingLocation()
-       
-
-        
+    // Add any changes here that you want when the map appears
         
         
     }
@@ -74,7 +76,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.view.addSubview(menuButton)
         
         
-        let item1 = ExpandingMenuItem(size: menuButtonSize, title: "Find Nearby", image: UIImage(named: "icplacewhite")!, highlightedImage: UIImage(named: "icplacewhite")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
+        let item1 = ExpandingMenuItem(size: menuButtonSize, title: nil, image: UIImage(named: "icplacewhite")!, highlightedImage: UIImage(named: "icplacewhite")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
             
             //To be completed
             
@@ -83,7 +85,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
         }
         
-        let item2 = ExpandingMenuItem(size: menuButtonSize, title: "Add Pin", image: UIImage(named: "icaddlocationwhite")!, highlightedImage: UIImage(named: "icaddlocationwhite")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
+        let item2 = ExpandingMenuItem(size: menuButtonSize, title: nil, image: UIImage(named: "icaddlocationwhite")!, highlightedImage: UIImage(named: "icaddlocationwhite")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
             
             //To be completed
             
@@ -93,7 +95,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
 
         
-        let item3 = ExpandingMenuItem(size: menuButtonSize, title: "My Location", image: UIImage(named: "mylocation")!, highlightedImage: UIImage(named: "mylocation")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
+        let item3 = ExpandingMenuItem(size: menuButtonSize, title: nil, image: UIImage(named: "mylocation")!, highlightedImage: UIImage(named: "mylocation")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
             
             // Complete
 
@@ -119,12 +121,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
          //   print("MenuItems dismissed.")
         }
         
-        item1.titleColor = UIColor.brownColor()
-        item2.titleColor = UIColor.brownColor()
-        item3.titleColor = UIColor.brownColor()
+      //  item1.titleColor = UIColor.brownColor()
+      //  item2.titleColor = UIColor.brownColor()
+      //  item3.titleColor = UIColor.brownColor()
+        
         
         menuButton.bottomViewColor = UIColor.clearColor()
         menuButton.bottomViewAlpha = 0.2
+        menuButton.allowSounds = false
+        
        
         
         
