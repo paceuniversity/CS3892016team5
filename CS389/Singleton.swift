@@ -21,7 +21,7 @@ class Singleton{
     static let sharedInstance = Singleton()
     
     var eventsArray = [String]()
-    var user: User?
+    var user: User? = nil
     
     
     private init(){
@@ -30,6 +30,8 @@ class Singleton{
             if authData != nil {
                 let user = User(id: authData.uid, token: authData.token)
                 self.user = user
+            } else {
+                self.user = nil
             }
         })
     }

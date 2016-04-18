@@ -70,7 +70,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
                      withCompletionBlock: { (error, auth) -> Void in
                         if error == nil {
                             print (auth)
-                            self.performSegueWithIdentifier("toMapView", sender: self)
                             self.navigationController?.popViewControllerAnimated(true)
                         } else {
                             print(error)
