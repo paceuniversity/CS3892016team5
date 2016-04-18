@@ -19,6 +19,8 @@
 		34E9FA1A1C8E0E7B0067F058 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34E9FA191C8E0E7B0067F058 /* Assets.xcassets */; };
 		34E9FA1D1C8E0E7B0067F058 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34E9FA1B1C8E0E7B0067F058 /* LaunchScreen.storyboard */; };
 		34F2442D1CA1EB590011B33E /* AboutMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F2442C1CA1EB590011B33E /* AboutMenuController.swift */; };
+		89D1CECD1CC5220600C4BA3D /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1CECC1CC5220600C4BA3D /* Event.swift */; };
+		89D1CECF1CC5222D00C4BA3D /* EventAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1CECE1CC5222D00C4BA3D /* EventAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		34E9FA1E1C8E0E7B0067F058 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34F2442C1CA1EB590011B33E /* AboutMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutMenuController.swift; sourceTree = "<group>"; };
 		4DBE8A01916A82FD841A8934 /* Pods-CS389.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS389.release.xcconfig"; path = "Pods/Target Support Files/Pods-CS389/Pods-CS389.release.xcconfig"; sourceTree = "<group>"; };
+		89D1CECC1CC5220600C4BA3D /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		89D1CECE1CC5222D00C4BA3D /* EventAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventAnnotation.swift; sourceTree = "<group>"; };
 		9445DE979F2609CCE61168C4 /* Pods-CS389.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS389.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CS389/Pods-CS389.debug.xcconfig"; sourceTree = "<group>"; };
 		B0C9A57D26553C4776B101E8 /* Pods_CS389.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CS389.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -94,6 +98,8 @@
 				34E9FA191C8E0E7B0067F058 /* Assets.xcassets */,
 				34E9FA1B1C8E0E7B0067F058 /* LaunchScreen.storyboard */,
 				34E9FA1E1C8E0E7B0067F058 /* Info.plist */,
+				89D1CECC1CC5220600C4BA3D /* Event.swift */,
+				89D1CECE1CC5222D00C4BA3D /* EventAnnotation.swift */,
 			);
 			path = CS389;
 			sourceTree = "<group>";
@@ -229,7 +235,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89D1CECD1CC5220600C4BA3D /* Event.swift in Sources */,
 				34E9FA151C8E0E7B0067F058 /* ViewController.swift in Sources */,
+				89D1CECF1CC5222D00C4BA3D /* EventAnnotation.swift in Sources */,
 				34047F601CBDDD7500E1930E /* Singleton.swift in Sources */,
 				34E9FA131C8E0E7B0067F058 /* AppDelegate.swift in Sources */,
 				3413DF801C8F817A00518B94 /* MapViewController.swift in Sources */,

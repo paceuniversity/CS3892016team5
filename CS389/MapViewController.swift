@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Firebase
 
 //CocoaPods-------
 import SideMenu
@@ -24,7 +25,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var locationManager = CLLocationManager()
     
     var address: String = ""
-    var annotation = MKPointAnnotation()
     
     var sharedInstance: Singleton!
    
@@ -42,8 +42,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.requestWhenInUseAuthorization()
         
         locationManager.startUpdatingLocation()
-        
-
     
         
         mapView.showsPointsOfInterest = true
@@ -60,6 +58,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        let  ref = Firebase(url:"https://mutirao.firebaseio.com/events")
+        // Attach a closure to read the data at our posts reference
+        ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
+            for child in snapshot.children {
+                let lat = child.childSnapshotForPath("lat")!.value
+                let lon = child.childSnapshotForPath("lon")!.value
+                let event = Event(id: child.key, lat: lat.doubleValue!, lon: lon.doubleValue!)
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                        self.addPin(event)
+                    });
+            }
+            }, withCancelBlock: { error in
+                print(error.description)
+        })
     // Add any changes here that you want when the map appears
         
         
@@ -143,38 +156,35 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     func addPin(){
-        
-        let overlays = self.mapView.overlays
-        self.mapView.removeOverlays(overlays)
-        
         let location = locationManager.location
-        
-        
         locationManager.startUpdatingLocation()
         
-        // Turn phone location into coordinates
         if location != nil {
-        let locCoord = CLLocationCoordinate2DMake(location!.coordinate.latitude, location!.coordinate.longitude)
-        
-        self.mapView.removeAnnotations(mapView.annotations)
-        
-        annotation.coordinate = locCoord
-        annotation.title = "Mutirão"
-        annotation.subtitle = address
- 
-    //    let placeMark = MKPlacemark(coordinate: locCoord, addressDictionary: nil)
-    //    destination = MKMapItem(placemark: placeMark)
-        
-        
-        
-        self.mapView.addAnnotation(annotation)
+            let event = Event(id: "New Event", lat: location!.coordinate.latitude, lon: location!.coordinate.longitude)
+            self.addPin(event)
         }
         
-        // Add string to global array
         sharedInstance.eventsArray.append(address)
         
         locationManager.stopUpdatingLocation()
+    }
+    
+    func addPin(event: Event) {
+        locationManager.startUpdatingLocation()
+        let location = CLLocation.init(latitude: event.lat, longitude: event.lon)
+        let annotation = EventAnnotation(event: event)
+        // Turn phone location into coordinates
+        let locCoord = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         
+        // self.mapView.removeAnnotations(mapView.annotations)
+        
+        annotation.coordinate = locCoord
+        annotation.title = event.id
+//        annotation.subtitle = address
+        
+        self.mapView.addAnnotation(annotation)
+
+
     }
     
     
@@ -268,14 +278,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     func mapView (mapView: MKMapView,viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
-        //   let pinView: MKPinAnnotationView = MKPinAnnotationView()
-        
         if annotation is MKUserLocation{
             return nil
         }
         
         
-        let reuseId = "reuse"
+        let reuseId = "reuse" + annotation.title!!
         
         
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
@@ -312,11 +320,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let deleteAction = UIAlertAction(title: "Remove Pin", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            
-            self.mapView.removeAnnotation(self.annotation)
-
-            
-            
+            if let annotation = view.annotation as? EventAnnotation {
+                annotation.event.delete()
+                self.mapView.removeAnnotation(annotation)
+            }
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
