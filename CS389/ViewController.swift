@@ -60,6 +60,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     func dismissKeyboard(){
         view.endEditing(true)
+        
     }
     
     
