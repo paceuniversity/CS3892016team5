@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 
 class ViewController: UIViewController, UITextFieldDelegate{
@@ -64,20 +65,27 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     
     @IBAction func logInAction(sender: AnyObject) {
-        
-        
-        self.performSegueWithIdentifier("toMapView", sender: self)
-        self.navigationController?.popViewControllerAnimated(true)
-        
+        let ref = Firebase(url: "https://mutirao.firebaseio.com")
+        ref.authUser(self.userNameBox.text, password: self.passwordBox.text,
+                     withCompletionBlock: { (error, auth) -> Void in
+                        if error == nil {
+                            self.performSegueWithIdentifier("toMapView", sender: self)
+                            self.navigationController?.popViewControllerAnimated(true)
+                        } else {
+                            print(error)
+                        }
+        })
     }
     
     
     
     @IBAction func signUpAction(sender: AnyObject) {
-        
-        
-        
-        
+        let ref = Firebase(url: "https://mutirao.firebaseio.com")
+        ref.createUser(userNameBox.text, password: passwordBox.text) { (error: NSError!) in
+            if error == nil {
+                self.logInAction(sender)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
