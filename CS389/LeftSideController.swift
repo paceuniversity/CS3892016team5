@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 
 
@@ -35,8 +36,8 @@ class LeftSideController: UITableViewController{
             let alert = UIAlertController(title: "Logout", message: "Are You Sure You Want To Log Out?", preferredStyle: .Alert)
             let yesAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: {
                 (_)in
-                
-                
+                let ref = Firebase(url: "https://mutirao.firebaseio.com")
+                ref.unauth()
                 self.performSegueWithIdentifier("unwindToLogin", sender: self)
                 
                 

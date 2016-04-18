@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 
 
@@ -20,10 +21,17 @@ class Singleton{
     static let sharedInstance = Singleton()
     
     var eventsArray = [String]()
+    var user: User?
     
     
     private init(){
-        
+        let ref = Firebase(url: "https://mutirao.firebaseio.com")
+        ref.observeAuthEventWithBlock({ authData in
+            if authData != nil {
+                let user = User(id: authData.uid, token: authData.token)
+                self.user = user
+            }
+        })
     }
     
 }

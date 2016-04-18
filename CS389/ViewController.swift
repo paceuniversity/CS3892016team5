@@ -69,6 +69,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         ref.authUser(self.userNameBox.text, password: self.passwordBox.text,
                      withCompletionBlock: { (error, auth) -> Void in
                         if error == nil {
+                            print (auth)
                             self.performSegueWithIdentifier("toMapView", sender: self)
                             self.navigationController?.popViewControllerAnimated(true)
                         } else {
@@ -84,6 +85,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
         ref.createUser(userNameBox.text, password: passwordBox.text) { (error: NSError!) in
             if error == nil {
                 self.logInAction(sender)
+            } else {
+                print(error)
             }
         }
     }

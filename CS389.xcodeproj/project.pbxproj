@@ -19,6 +19,8 @@
 		34E9FA1A1C8E0E7B0067F058 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34E9FA191C8E0E7B0067F058 /* Assets.xcassets */; };
 		34E9FA1D1C8E0E7B0067F058 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34E9FA1B1C8E0E7B0067F058 /* LaunchScreen.storyboard */; };
 		34F2442D1CA1EB590011B33E /* AboutMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F2442C1CA1EB590011B33E /* AboutMenuController.swift */; };
+		891E02AD1CC5475B00041B56 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891E02AC1CC5475B00041B56 /* User.swift */; };
+		891E02AF1CC54DE200041B56 /* EventManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891E02AE1CC54DE200041B56 /* EventManagerViewController.swift */; };
 		89D1CECD1CC5220600C4BA3D /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1CECC1CC5220600C4BA3D /* Event.swift */; };
 		89D1CECF1CC5222D00C4BA3D /* EventAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1CECE1CC5222D00C4BA3D /* EventAnnotation.swift */; };
 /* End PBXBuildFile section */
@@ -38,6 +40,8 @@
 		34E9FA1E1C8E0E7B0067F058 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34F2442C1CA1EB590011B33E /* AboutMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutMenuController.swift; sourceTree = "<group>"; };
 		4DBE8A01916A82FD841A8934 /* Pods-CS389.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS389.release.xcconfig"; path = "Pods/Target Support Files/Pods-CS389/Pods-CS389.release.xcconfig"; sourceTree = "<group>"; };
+		891E02AC1CC5475B00041B56 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		891E02AE1CC54DE200041B56 /* EventManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManagerViewController.swift; sourceTree = "<group>"; };
 		89D1CECC1CC5220600C4BA3D /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		89D1CECE1CC5222D00C4BA3D /* EventAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventAnnotation.swift; sourceTree = "<group>"; };
 		9445DE979F2609CCE61168C4 /* Pods-CS389.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS389.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CS389/Pods-CS389.debug.xcconfig"; sourceTree = "<group>"; };
@@ -90,6 +94,7 @@
 				34E9FA121C8E0E7B0067F058 /* AppDelegate.swift */,
 				34E9FA141C8E0E7B0067F058 /* ViewController.swift */,
 				34ABE6361C9D88CD002CD02C /* LeftSideController.swift */,
+				891E02AE1CC54DE200041B56 /* EventManagerViewController.swift */,
 				34F2442C1CA1EB590011B33E /* AboutMenuController.swift */,
 				34E9FA161C8E0E7B0067F058 /* Main.storyboard */,
 				3437CDF21CA9B30100AA80E2 /* RightSideController.swift */,
@@ -100,6 +105,7 @@
 				34E9FA1E1C8E0E7B0067F058 /* Info.plist */,
 				89D1CECC1CC5220600C4BA3D /* Event.swift */,
 				89D1CECE1CC5222D00C4BA3D /* EventAnnotation.swift */,
+				891E02AC1CC5475B00041B56 /* User.swift */,
 			);
 			path = CS389;
 			sourceTree = "<group>";
@@ -236,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				89D1CECD1CC5220600C4BA3D /* Event.swift in Sources */,
+				891E02AF1CC54DE200041B56 /* EventManagerViewController.swift in Sources */,
 				34E9FA151C8E0E7B0067F058 /* ViewController.swift in Sources */,
 				89D1CECF1CC5222D00C4BA3D /* EventAnnotation.swift in Sources */,
 				34047F601CBDDD7500E1930E /* Singleton.swift in Sources */,
@@ -243,6 +250,7 @@
 				3413DF801C8F817A00518B94 /* MapViewController.swift in Sources */,
 				34F2442D1CA1EB590011B33E /* AboutMenuController.swift in Sources */,
 				3437CDF31CA9B30100AA80E2 /* RightSideController.swift in Sources */,
+				891E02AD1CC5475B00041B56 /* User.swift in Sources */,
 				34ABE6371C9D88CD002CD02C /* LeftSideController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

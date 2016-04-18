@@ -15,7 +15,7 @@ import SideMenu
 import ExpandingMenu
 //---------------
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, EventManagerViewControllerDelegate {
     
     
     @IBOutlet var mapView: MKMapView!
@@ -102,8 +102,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let item2 = ExpandingMenuItem(size: menuButtonSize, title: nil, image: UIImage(named: "icaddlocationwhite")!, highlightedImage: UIImage(named: "icaddlocationwhite")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
             
             //To be completed
-            
-            self.addPin()
+            self.performSegueWithIdentifier("showEventManager", sender: self)
             
             
         }
@@ -283,7 +282,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
         
-        let reuseId = "reuse" + annotation.title!!
+        let reuseId = "reuse"
         
         
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
@@ -346,6 +345,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         
         print("pin pressed")
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let id = segue.identifier {
+            if id == "showEventManager" {
+                if let vc = segue.destinationViewController as? EventManagerViewController {
+                    vc.title = "Create an event"
+                    vc.delegate = self
+                }
+            }
+        }
+    }
+    
+    
+    func didFinishEditing(sender: EventManagerViewController) {
         
     }
 

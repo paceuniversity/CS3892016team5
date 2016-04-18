@@ -338,6 +338,44 @@
             </objects>
             <point key="canvasLocation" x="7051.5" y="952.5"/>
         </scene>
+        <!--Event Manager View Controller-->
+        <scene sceneID="77A-7H-M5y">
+            <objects>
+                <viewController id="p8t-b3-Jta" customClass="EventManagerViewController" customModule="CS389" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="f4G-NC-zQ5"/>
+                        <viewControllerLayoutGuide type="bottom" id="qSh-vE-LeX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QVS-WR-IHq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUM-HG-uly">
+                                <rect key="frame" x="164" y="564" width="46" height="30"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="save" destination="p8t-b3-Jta" eventType="touchUpInside" id="q2A-DA-hnx"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kno-3R-8hD">
+                                <rect key="frame" x="139" y="135" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4ML-Io-cLm">
+                                <rect key="frame" x="139" y="79" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YIh-kT-Rzi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5556.5" y="-454.5"/>
+        </scene>
         <!--Events-->
         <scene sceneID="cp7-bi-MaQ">
             <objects>
@@ -441,6 +479,7 @@
                         <outlet property="mapType" destination="5ii-q7-nWg" id="len-nQ-1m1"/>
                         <outlet property="mapView" destination="1rd-oZ-dpn" id="QPG-db-LWQ"/>
                         <segue destination="GDT-sb-bmP" kind="presentation" identifier="toMenu" id="qAP-f3-zl1"/>
+                        <segue destination="p8t-b3-Jta" kind="show" identifier="showEventManager" id="8I3-OA-fa6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FzA-6H-2IT" userLabel="First Responder" sceneMemberID="firstResponder"/>
