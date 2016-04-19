@@ -102,7 +102,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let item2 = ExpandingMenuItem(size: menuButtonSize, title: nil, image: UIImage(named: "icaddlocationwhite")!, highlightedImage: UIImage(named: "icaddlocationwhite")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
             
             //To be completed
-            self.performSegueWithIdentifier("showEventManager", sender: self)
+            if Singleton.sharedInstance.user == nil {
+                self.performSegueWithIdentifier("login", sender: self)
+            } else {
+                self.performSegueWithIdentifier("showEventManager", sender: self)
+            }
             
             
         }
