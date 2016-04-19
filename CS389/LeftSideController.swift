@@ -29,7 +29,7 @@ class LeftSideController: UITableViewController{
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        sideTableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
         
         if indexPath.row == 2{
             
@@ -57,7 +57,7 @@ class LeftSideController: UITableViewController{
             
         }
         
-        
+        sideTableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         
     }

@@ -18,6 +18,9 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
  
     
+
+ 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -81,14 +84,67 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     
     @IBAction func signUpAction(sender: AnyObject) {
-        let ref = Firebase(url: "https://mutirao.firebaseio.com")
-        ref.createUser(userNameBox.text, password: passwordBox.text) { (error: NSError!) in
-            if error == nil {
-                self.logInAction(sender)
-            } else {
-                print(error)
+        var createUserText: UITextField!
+        var createPasswordText: UITextField!
+        
+        
+        let signUpView = UIAlertController(title: "Create Account", message: "Please create a username and password", preferredStyle: .Alert)
+        
+        
+        signUpView.addTextFieldWithConfigurationHandler { (textField) in
+           
+            createUserText = textField
+            textField.placeholder = "Email"
+            textField.keyboardType = .EmailAddress
+            
+            
+            
+        }
+        
+        signUpView.addTextFieldWithConfigurationHandler { (textField) in
+            
+            createPasswordText = textField
+            textField.placeholder = "Password"
+            textField.secureTextEntry = true
+            
+            
+        }
+        
+        let createAction = UIAlertAction(title: "Create", style: UIAlertActionStyle.Default, handler: {
+            (_)in
+            
+            let ref = Firebase(url: "https://mutirao.firebaseio.com")
+            
+            if createUserText.text != nil && createPasswordText.text != nil{
+            
+            ref.createUser(createUserText.text, password: createPasswordText.text) { (error: NSError!) in
+                if error != nil {
+                    print(error)
+                }
             }
         }
+            
+})
+        
+          signUpView.addAction(createAction)
+        
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {
+            (_)in
+            
+            createUserText.text = ""
+            createPasswordText.text = ""
+            
+            
+        })
+
+      
+        signUpView.addAction(cancelAction)
+        
+        self.presentViewController(signUpView, animated: true, completion: nil)
+        
+        
+       
     }
 
     override func didReceiveMemoryWarning() {

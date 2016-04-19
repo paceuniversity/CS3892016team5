@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         return true
+    }
+    
+    // Keeps data cached in offline mode
+    override init() {
+        super.init()
+        Firebase.defaultConfig().persistenceEnabled = true
     }
 
     func applicationWillResignActive(application: UIApplication) {
