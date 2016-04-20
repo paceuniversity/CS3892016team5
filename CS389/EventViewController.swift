@@ -26,7 +26,7 @@ class EventViewController: UIViewController {
             let decodedData = NSData(base64EncodedString: event.picture, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
             let decodedimage = UIImage(data: decodedData!)
             
-            // If no image, do not crash
+            // If no image, should not crash
             if decodedimage != nil{
             imageView.image = decodedimage! as UIImage
             }
