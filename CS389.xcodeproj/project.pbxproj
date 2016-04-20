@@ -21,6 +21,8 @@
 		34F2442D1CA1EB590011B33E /* AboutMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F2442C1CA1EB590011B33E /* AboutMenuController.swift */; };
 		891E02AD1CC5475B00041B56 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891E02AC1CC5475B00041B56 /* User.swift */; };
 		891E02AF1CC54DE200041B56 /* EventManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891E02AE1CC54DE200041B56 /* EventManagerViewController.swift */; };
+		891F49CB1CC731EE00091405 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 891F49CA1CC731EE00091405 /* add.png */; };
+		891F49CD1CC7566400091405 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891F49CC1CC7566400091405 /* EventViewController.swift */; };
 		89D1CECD1CC5220600C4BA3D /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1CECC1CC5220600C4BA3D /* Event.swift */; };
 		89D1CECF1CC5222D00C4BA3D /* EventAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1CECE1CC5222D00C4BA3D /* EventAnnotation.swift */; };
 /* End PBXBuildFile section */
@@ -43,6 +45,8 @@
 		891E02AC1CC5475B00041B56 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		891E02AE1CC54DE200041B56 /* EventManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManagerViewController.swift; sourceTree = "<group>"; };
 		891E02B01CC57CA400041B56 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		891F49CA1CC731EE00091405 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
+		891F49CC1CC7566400091405 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		89D1CECC1CC5220600C4BA3D /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		89D1CECE1CC5222D00C4BA3D /* EventAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventAnnotation.swift; sourceTree = "<group>"; };
 		9445DE979F2609CCE61168C4 /* Pods-CS389.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS389.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CS389/Pods-CS389.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,12 +97,14 @@
 		34E9FA111C8E0E7B0067F058 /* CS389 */ = {
 			isa = PBXGroup;
 			children = (
+				891F49C91CC731E400091405 /* images */,
 				34E9FA121C8E0E7B0067F058 /* AppDelegate.swift */,
 				34E9FA141C8E0E7B0067F058 /* ViewController.swift */,
 				34ABE6361C9D88CD002CD02C /* LeftSideController.swift */,
 				891E02AE1CC54DE200041B56 /* EventManagerViewController.swift */,
 				34F2442C1CA1EB590011B33E /* AboutMenuController.swift */,
 				34E9FA161C8E0E7B0067F058 /* Main.storyboard */,
+				891F49CC1CC7566400091405 /* EventViewController.swift */,
 				3437CDF21CA9B30100AA80E2 /* RightSideController.swift */,
 				34047F5F1CBDDD7500E1930E /* Singleton.swift */,
 				3413DF7F1C8F817A00518B94 /* MapViewController.swift */,
@@ -110,6 +116,14 @@
 				891E02AC1CC5475B00041B56 /* User.swift */,
 			);
 			path = CS389;
+			sourceTree = "<group>";
+		};
+		891F49C91CC731E400091405 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				891F49CA1CC731EE00091405 /* add.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 		CE275632048014A23129B3C3 /* Pods */ = {
@@ -185,6 +199,7 @@
 				34E63A641C8F8E1100082486 /* Main.storyboard in Resources */,
 				34E9FA1D1C8E0E7B0067F058 /* LaunchScreen.storyboard in Resources */,
 				34E9FA1A1C8E0E7B0067F058 /* Assets.xcassets in Resources */,
+				891F49CB1CC731EE00091405 /* add.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +263,7 @@
 				34E9FA151C8E0E7B0067F058 /* ViewController.swift in Sources */,
 				89D1CECF1CC5222D00C4BA3D /* EventAnnotation.swift in Sources */,
 				34047F601CBDDD7500E1930E /* Singleton.swift in Sources */,
+				891F49CD1CC7566400091405 /* EventViewController.swift in Sources */,
 				34E9FA131C8E0E7B0067F058 /* AppDelegate.swift in Sources */,
 				3413DF801C8F817A00518B94 /* MapViewController.swift in Sources */,
 				34F2442D1CA1EB590011B33E /* AboutMenuController.swift in Sources */,

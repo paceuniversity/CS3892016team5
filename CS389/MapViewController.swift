@@ -27,6 +27,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var address: String = ""
     
     var sharedInstance: Singleton!
+    
+    var selectedEvent: Event?
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,13 +67,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 let lat = child.childSnapshotForPath("lat")!.value
                 let lon = child.childSnapshotForPath("lon")!.value
                 let event = Event(id: child.key, lat: lat.doubleValue!, lon: lon.doubleValue!)
-                
-                dispatch_async(dispatch_get_main_queue(), {
+                event.load({snapshot in
+                    dispatch_async(dispatch_get_main_queue(), {
                         self.addPin(event)
                     });
+                })
             }
             }, withCancelBlock: { error in
                 print(error.description)
+        })
+        
+        ref.observeEventType(.ChildAdded, withBlock: { snapshot in
+            let lat = snapshot.childSnapshotForPath("lat")!.value
+            let lon = snapshot.childSnapshotForPath("lon")!.value
+            let event = Event(id: snapshot.key, lat: lat.doubleValue!, lon: lon.doubleValue!)
+            event.load({snapshot in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.addPin(event)
+                });
+            })
         })
     // Add any changes here that you want when the map appears
         
@@ -156,21 +170,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func stopUpdating(){
         locationManager.stopUpdatingLocation()
     }
-    
-    
-    func addPin(){
-        let location = locationManager.location
-        locationManager.startUpdatingLocation()
-        
-        if location != nil {
-            let event = Event(id: "New Event", lat: location!.coordinate.latitude, lon: location!.coordinate.longitude)
-            self.addPin(event)
-        }
-        
-        sharedInstance.eventsArray.append(address)
-        
-        locationManager.stopUpdatingLocation()
-    }
+
     
     func addPin(event: Event) {
         locationManager.startUpdatingLocation()
@@ -182,8 +182,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // self.mapView.removeAnnotations(mapView.annotations)
         
         annotation.coordinate = locCoord
-        annotation.title = event.id
-//        annotation.subtitle = address
+        annotation.title = event.name
+        annotation.subtitle = event.address
         
         self.mapView.addAnnotation(annotation)
 
@@ -317,31 +317,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        
-        let optionMenu = UIAlertController(title: nil, message: address, preferredStyle: .ActionSheet)
-        
-        
-        let deleteAction = UIAlertAction(title: "Remove Pin", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
-            if let annotation = view.annotation as? EventAnnotation {
-                annotation.event.delete()
-                self.mapView.removeAnnotation(annotation)
-            }
-        })
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
-            
-        })
-        
-        
-        
-        optionMenu.addAction(deleteAction)
-        optionMenu.addAction(cancelAction)
-        
-        self.presentViewController(optionMenu, animated: true, completion: nil)
-        
-        
+        if let annotation = view.annotation as? EventAnnotation {
+            self.selectedEvent = annotation.event
+            self.performSegueWithIdentifier("loadEvent", sender: self)
+        }
     }
 
     
@@ -357,14 +336,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             if id == "showEventManager" {
                 if let vc = segue.destinationViewController as? EventManagerViewController {
                     vc.title = "Create an event"
-                    vc.delegate = self
+//                    vc.delegate = self
+                }
+            } else {
+                if id == "loadEvent" {
+                    if let vc = segue.destinationViewController as? EventViewController {
+                        vc.event = self.selectedEvent
+                    }
                 }
             }
         }
     }
     
     
-    func didFinishEditing(sender: EventManagerViewController) {
+    func didManageFinishEditingEvent(manager: EventManagerViewController, event: Event) {
         
     }
 
