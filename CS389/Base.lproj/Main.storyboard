@@ -316,30 +316,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g74-Ic-4Tq">
-                                <rect key="frame" x="52" y="187" width="272" height="406"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g74-Ic-4Tq">
+                                <rect key="frame" x="52" y="156" width="272" height="406"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <string key="text">version: 1.0
+                                <string key="text">Version: 1.0
 
 What is Mutirão?
+
 The app is a tool to help people find, promote and organize a very specific, very common in Brazil, type of communal work called “mutirão”. The app is going to use Facebook to leverage reach of the promotion and will use geolocation info so people can see nearby “mutirões” to participate.
 
-authors:
+Authors:
 
 Gabriel Ribeiro
 Evis Lazimi
 Ian Carvalho
 Brayan Kostiovchok
-
-
 </string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" secureTextEntry="YES"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2v-oP-bqs">
-                                <rect key="frame" x="126" y="84" width="125" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="About Us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2v-oP-bqs">
+                                <rect key="frame" x="52" y="84" width="125" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="NlG-pw-owa"/>
                                 </constraints>
