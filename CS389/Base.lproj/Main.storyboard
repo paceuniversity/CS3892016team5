@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="a0T-XB-ROO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="a0T-XB-ROO">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -316,20 +316,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Sample Text" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="g74-Ic-4Tq">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g74-Ic-4Tq">
+                                <rect key="frame" x="52" y="187" width="272" height="406"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <string key="text">version: 1.0
+
+What is Mutirão?
+The app is a tool to help people find, promote and organize a very specific, very common in Brazil, type of communal work called “mutirão”. The app is going to use Facebook to leverage reach of the promotion and will use geolocation info so people can see nearby “mutirões” to participate.
+
+authors:
+
+Gabriel Ribeiro
+Evis Lazimi
+Ian Carvalho
+Brayan Kostiovchok
+
+
+</string>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" secureTextEntry="YES"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b2v-oP-bqs">
+                                <rect key="frame" x="126" y="84" width="125" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="NlG-pw-owa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.95686274509803915" green="0.70196078431372544" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="g74-Ic-4Tq" secondAttribute="trailing" id="dFI-r6-1SM"/>
-                            <constraint firstItem="g74-Ic-4Tq" firstAttribute="leading" secondItem="CPY-0B-YyA" secondAttribute="leading" id="eaw-KF-G5Y"/>
-                            <constraint firstItem="g74-Ic-4Tq" firstAttribute="top" secondItem="uep-kN-spX" secondAttribute="bottom" id="lzt-dZ-ER4"/>
-                            <constraint firstItem="g74-Ic-4Tq" firstAttribute="bottom" secondItem="Dju-7e-gUh" secondAttribute="top" id="xl3-KG-NfK"/>
+                            <constraint firstItem="b2v-oP-bqs" firstAttribute="centerX" secondItem="g74-Ic-4Tq" secondAttribute="centerX" id="6xq-CT-W0o"/>
+                            <constraint firstItem="g74-Ic-4Tq" firstAttribute="top" secondItem="b2v-oP-bqs" secondAttribute="bottom" constant="63" id="doN-Ev-L08"/>
+                            <constraint firstItem="g74-Ic-4Tq" firstAttribute="leading" secondItem="CPY-0B-YyA" secondAttribute="leadingMargin" constant="36" id="hE9-ld-q5J"/>
+                            <constraint firstItem="g74-Ic-4Tq" firstAttribute="top" secondItem="uep-kN-spX" secondAttribute="bottom" constant="123" id="jhQ-26-gKe"/>
+                            <constraint firstItem="b2v-oP-bqs" firstAttribute="top" secondItem="uep-kN-spX" secondAttribute="bottom" constant="20" id="lwR-g1-CGX"/>
+                            <constraint firstItem="g74-Ic-4Tq" firstAttribute="centerX" secondItem="CPY-0B-YyA" secondAttribute="centerX" id="p1a-0v-lzN"/>
+                            <constraint firstItem="Dju-7e-gUh" firstAttribute="top" secondItem="g74-Ic-4Tq" secondAttribute="bottom" constant="74" id="qWP-nq-3iq"/>
                         </constraints>
                     </view>
                 </viewController>
