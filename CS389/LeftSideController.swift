@@ -31,7 +31,7 @@ class LeftSideController: UITableViewController{
         
         
         
-        if indexPath.row == 2{
+        if indexPath.row == 3{
             
             let alert = UIAlertController(title: "Logout", message: "Are You Sure You Want To Log Out?", preferredStyle: .Alert)
             let yesAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: {
