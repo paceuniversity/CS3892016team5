@@ -68,6 +68,9 @@ class EventManagerViewController: UIViewController, UIImagePickerControllerDeleg
     
     
     @IBAction func editDescription(sender: AnyObject) {
+        
+        
+        
     }
 
     @IBAction func openLibrary(sender: AnyObject) {

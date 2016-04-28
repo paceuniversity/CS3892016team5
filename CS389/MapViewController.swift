@@ -29,6 +29,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var sharedInstance: Singleton!
     
     var selectedEvent: Event?
+    
+    var destination: MKMapItem = MKMapItem()
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +62,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let  ref = Firebase(url:"https://mutirao.firebaseio.com/events")
+        self.mapView.removeAnnotations(mapView.annotations)
+        
+        let ref = Firebase(url:"https://mutirao.firebaseio.com/events")
         // Attach a closure to read the data at our posts reference
         ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
             for child in snapshot.children {
@@ -173,6 +177,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     
     func addPin(event: Event) {
+        
         locationManager.startUpdatingLocation()
         let location = CLLocation.init(latitude: event.lat, longitude: event.lon)
         let annotation = EventAnnotation(event: event)
@@ -322,14 +327,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             self.performSegueWithIdentifier("loadEvent", sender: self)
         }
     }
-
     
-  
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-        
-        print("pin pressed")
-        
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let id = segue.identifier {

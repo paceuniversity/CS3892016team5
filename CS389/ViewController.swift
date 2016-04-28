@@ -49,7 +49,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
   
     @IBAction func unwindToLogIn(sender: UIStoryboardSegue){
     
-   
+          
     self.navigationController?.popViewControllerAnimated(true)
                
         
@@ -69,13 +69,17 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     
     @IBAction func logInAction(sender: AnyObject) {
-        let ref = Firebase(url: "https://mutirao.firebaseio.com")
+        let ref = Firebase(url: "https://mutirao.firebaseio.com/users")
+        
         ref.authUser(self.userNameBox.text, password: self.passwordBox.text,
                      withCompletionBlock: { (error, auth) -> Void in
                         if error == nil {
-                            print (auth)
-                            self.navigationController?.popViewControllerAnimated(true)
-                        } else {
+                    print (auth)
+                            
+                        self.navigationController?.popViewControllerAnimated(true)
+                        }
+                        
+                        else {
                             print(error)
                         }
         })
@@ -113,18 +117,36 @@ class ViewController: UIViewController, UITextFieldDelegate{
         let createAction = UIAlertAction(title: "Create", style: UIAlertActionStyle.Default, handler: {
             (_)in
             
-            let ref = Firebase(url: "https://mutirao.firebaseio.com")
+            let ref = Firebase(url: "https://mutirao.firebaseio.com/users")
             
-            if createUserText.text != nil && createPasswordText.text != nil{
+            if createUserText.text != "" && createPasswordText.text != ""{
             
-            ref.createUser(createUserText.text, password: createPasswordText.text) { (error: NSError!) in
+            ref.createUser(createUserText.text, password: createPasswordText.text, withValueCompletionBlock: { error, result in
+                
                 if error != nil {
-                    print(error)
+                    print(error.localizedDescription)
                 }
+                
+                else{
+                    
+                    //Create the record in the database with values email, password, picture and last location
+                    ref.authUser(createUserText.text, password: createPasswordText.text, withCompletionBlock: { (error, auth) in
+                        
+                        let user = ["email": createUserText.text, "password": auth.provider, "picture": "", "last_location" : ""]
+                        
+                        ref.childByAppendingPath(auth.uid).setValue(user)
+                        
+
+                        
+                    })
+                }
+                
+                
+                })
+                    
+                
             }
-        }
-            
-})
+        })
         
           signUpView.addAction(createAction)
         

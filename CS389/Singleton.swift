@@ -22,6 +22,8 @@ class Singleton{
     
     var eventsArray = [String]()
     var user: User? = nil
+    var profileImage: UIImage?
+    var isloggedin = false
     
     
     private init(){
@@ -35,5 +37,6 @@ class Singleton{
             }
         })
     }
+    
     
 }

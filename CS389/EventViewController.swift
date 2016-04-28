@@ -43,6 +43,7 @@ class EventViewController: UIViewController {
         
         event?.addAttendee(Singleton.sharedInstance.user!.id)
         self.navigationController?.popViewControllerAnimated(true)
+        
     }
 
     /*
