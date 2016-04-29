@@ -25,6 +25,7 @@
 		891F49CD1CC7566400091405 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891F49CC1CC7566400091405 /* EventViewController.swift */; };
 		89D1CECD1CC5220600C4BA3D /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1CECC1CC5220600C4BA3D /* Event.swift */; };
 		89D1CECF1CC5222D00C4BA3D /* EventAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D1CECE1CC5222D00C4BA3D /* EventAnnotation.swift */; };
+		89D559D31CD267E00000FCD1 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D559D21CD267E00000FCD1 /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		891F49CC1CC7566400091405 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		89D1CECC1CC5220600C4BA3D /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		89D1CECE1CC5222D00C4BA3D /* EventAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventAnnotation.swift; sourceTree = "<group>"; };
+		89D559D21CD267E00000FCD1 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		9445DE979F2609CCE61168C4 /* Pods-CS389.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CS389.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CS389/Pods-CS389.debug.xcconfig"; sourceTree = "<group>"; };
 		B0C9A57D26553C4776B101E8 /* Pods_CS389.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CS389.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -114,6 +116,7 @@
 				89D1CECC1CC5220600C4BA3D /* Event.swift */,
 				89D1CECE1CC5222D00C4BA3D /* EventAnnotation.swift */,
 				891E02AC1CC5475B00041B56 /* User.swift */,
+				89D559D21CD267E00000FCD1 /* Model.swift */,
 			);
 			path = CS389;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				89D1CECF1CC5222D00C4BA3D /* EventAnnotation.swift in Sources */,
 				34047F601CBDDD7500E1930E /* Singleton.swift in Sources */,
 				891F49CD1CC7566400091405 /* EventViewController.swift in Sources */,
+				89D559D31CD267E00000FCD1 /* Model.swift in Sources */,
 				34E9FA131C8E0E7B0067F058 /* AppDelegate.swift in Sources */,
 				3413DF801C8F817A00518B94 /* MapViewController.swift in Sources */,
 				34F2442D1CA1EB590011B33E /* AboutMenuController.swift in Sources */,

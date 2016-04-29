@@ -9,12 +9,16 @@
 import UIKit
 
 
+protocol RightSideControllerDelegate: class {
+    func didSelectEvent(sender: RightSideController, event: Event)
+}
 
-class RightSideController: UITableViewController{
+class RightSideController: UITableViewController, EventAddedDelegate{
     
     
     
     @IBOutlet weak var rightTableView: UITableView!
+    weak var delegate: RightSideControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +55,7 @@ class RightSideController: UITableViewController{
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
         }
         
-        
+        cell.textLabel?.text = Singleton.sharedInstance.eventsArray[indexPath.row].name
         return cell 
         
         
@@ -60,7 +64,7 @@ class RightSideController: UITableViewController{
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         rightTableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
+        delegate?.didSelectEvent(self, event: Singleton.sharedInstance.eventsArray[indexPath.row])
     }
     
   
@@ -77,6 +81,14 @@ class RightSideController: UITableViewController{
             
             
         }
+    }
+    
+    func didAddEvent(event: Event) {
+        
+    }
+    
+    func didEndAddingEvents(events: [Event]) {
+        self.tableView.reloadData()
     }
     
 }

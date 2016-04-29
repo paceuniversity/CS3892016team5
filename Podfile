@@ -9,7 +9,6 @@ pod 'SwiftyButton'
 pod 'SideMenu', '~> 1.0'
 pod 'ExpandingMenu', '~> 0.1'
 pod 'Firebase', '>= 2.5.1'
-
 end
 
 

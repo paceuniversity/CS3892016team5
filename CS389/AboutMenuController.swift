@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import Social
 
 class AboutMenu: UIViewController{
     
@@ -16,9 +16,7 @@ class AboutMenu: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        
+    
         
         
     }

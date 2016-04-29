@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import Firebase
 
-class User: NSObject {
-    let id: String
+class User: Model {
     let token: String
+    var eventsAttending = [Event]()
+    var eventsCreated = [Event]()
     
-    init(id: String, token: String) {
-        self.id = id
+    init(id: String, token: String, block: ((FDataSnapshot!) -> Void)! = { snapshot in }) {
         self.token = token
+        super.init(id: id, block: block)
     }
+    
+    override class func refUrl() -> String {
+        return "https://mutirao.firebaseio.com/users/"
+    }
+    
 }

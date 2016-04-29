@@ -20,8 +20,10 @@ class Singleton{
     
     static let sharedInstance = Singleton()
     
-    var eventsArray = [String]()
+    var eventsArray = [Event]()
+    var delegates = [EventAddedDelegate]()
     var user: User? = nil
+    var mainController: MapViewController?
     
     
     private init(){
@@ -34,6 +36,42 @@ class Singleton{
                 self.user = nil
             }
         })
+        
+        
+        let  eventRef = Firebase(url:"https://mutirao.firebaseio.com/events")
+        // Attach a closure to read the data at our posts reference
+        eventRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
+            for child in snapshot.children {
+                let newEvent = Event(snapshot: child as! FDataSnapshot)
+                self.eventsArray.append(newEvent)
+                dispatch_async(dispatch_get_main_queue(), {
+                    for delegate in self.delegates {
+                        delegate.didAddEvent(newEvent)
+                    }
+                })
+            }
+            for delegate in self.delegates {
+                delegate.didEndAddingEvents(self.eventsArray)
+            }
+            
+            }, withCancelBlock: { error in
+                print(error.description)
+        })
+        
+        eventRef.observeEventType(.ChildAdded, withBlock: { snapshot in
+            let newEvent = Event(snapshot: snapshot)
+            self.eventsArray.append(newEvent)
+            dispatch_async(dispatch_get_main_queue(), {
+                for delegate in self.delegates {
+                    delegate.didAddEvent(newEvent)
+                    delegate.didEndAddingEvents(self.eventsArray)
+                }
+            });
+
+        })
+
+        
+        
     }
     
 }

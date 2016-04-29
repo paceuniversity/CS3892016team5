@@ -15,7 +15,9 @@ import SideMenu
 import ExpandingMenu
 //---------------
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, EventManagerViewControllerDelegate {
+
+
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, EventManagerViewControllerDelegate, RightSideControllerDelegate {
     
     
     @IBOutlet var mapView: MKMapView!
@@ -23,8 +25,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     var locationManager = CLLocationManager()
-    
-    var address: String = ""
     
     var sharedInstance: Singleton!
     
@@ -34,7 +34,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.viewDidLoad()
         
         sharedInstance = Singleton.sharedInstance
-        
+        sharedInstance.mainController = self
         mapView.delegate = self
         locationManager.delegate = self
         
@@ -52,21 +52,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
         createMenu()
+        createPins()
         
 
 
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
+    func createPins() {
         let  ref = Firebase(url:"https://mutirao.firebaseio.com/events")
-        // Attach a closure to read the data at our posts reference
         ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
             for child in snapshot.children {
-                let lat = child.childSnapshotForPath("lat")!.value
-                let lon = child.childSnapshotForPath("lon")!.value
-                let event = Event(id: child.key, lat: lat.doubleValue!, lon: lon.doubleValue!)
+                let event = Event(snapshot: child as! FDataSnapshot)
                 event.load({snapshot in
                     dispatch_async(dispatch_get_main_queue(), {
                         self.addPin(event)
@@ -78,9 +74,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         })
         
         ref.observeEventType(.ChildAdded, withBlock: { snapshot in
-            let lat = snapshot.childSnapshotForPath("lat")!.value
-            let lon = snapshot.childSnapshotForPath("lon")!.value
-            let event = Event(id: snapshot.key, lat: lat.doubleValue!, lon: lon.doubleValue!)
+            let event = Event(snapshot: snapshot)
             event.load({snapshot in
                 dispatch_async(dispatch_get_main_queue(), {
                     self.addPin(event)
@@ -226,48 +220,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let location = locations.last
         
-        var placemark: CLPlacemark!
-        
-        //Reverse geocode function- complete
-        
-        if location != nil{
-        CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)->Void in
-            if error == nil && placemarks!.count > 0 {
-                placemark = placemarks![0] as CLPlacemark
-                
-                    if placemark.subThoroughfare != nil {
-                        self.address = placemark.subThoroughfare! + " "
-                    }
-                    if placemark.thoroughfare != nil {
-                        self.address = self.address + placemark.thoroughfare! + " "
-                    }
-                    if placemark.postalCode != nil {
-                        self.address = self.address + placemark.postalCode! + ", "
-                    }
-                    if placemark.locality != nil {
-                        self.address = self.address + placemark.locality! + " "
-                    }
-                    if placemark.administrativeArea != nil {
-                        self.address = self.address + placemark.administrativeArea! + ", "
-                    }
-                    if placemark.country != nil {
-                        self.address = self.address + placemark.country!
-                    }
-            }
-        
-        })
-            
-        }
-        
-        
         let center = CLLocationCoordinate2DMake(location!.coordinate.latitude, location!.coordinate.longitude)
         
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
         
         
         self.mapView.setRegion(region, animated: true)
-        
-        
         
         
         self.locationManager.stopUpdatingLocation()
@@ -338,13 +296,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     vc.title = "Create an event"
 //                    vc.delegate = self
                 }
-            } else {
-                if id == "loadEvent" {
-                    if let vc = segue.destinationViewController as? EventViewController {
-                        vc.event = self.selectedEvent
-                    }
+            } else if id == "loadEvent" {
+                if let vc = segue.destinationViewController as? EventViewController {
+                    vc.event = self.selectedEvent
+                }
+            } else if id == "toEvents" {
+                if let vc = segue.destinationViewController as? RightSideController {
+                    vc.delegate = self
                 }
             }
+            
+        
         }
     }
     
@@ -352,7 +314,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func didManageFinishEditingEvent(manager: EventManagerViewController, event: Event) {
         
     }
+    
+    func didSelectEvent(sender: RightSideController, event: Event) {
+        self.selectedEvent = event
+        self.performSegueWithIdentifier("loadEvent", sender: self)
+    }
 
     
     
-    }
+}
+

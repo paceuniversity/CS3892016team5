@@ -8,23 +8,41 @@
 
 import UIKit
 import Firebase
-
-
+import SideMenu
 
 class LeftSideController: UITableViewController{
 
     @IBOutlet weak var sideTableView: UITableView!
+    var menuCells = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
      //   self.sideTableView.contentInset.top = self.view.frame.height / 4
-
+        menuCells = ["about", "help"]
         self.sideTableView.delegate = self
         self.sideTableView.dataSource = self
         
     }
     
+    override func viewDidAppear(animated: Bool) {
+        if Singleton.sharedInstance.user != nil {
+            menuCells = ["profile", "about", "help", "logout"]
+        } else {
+            menuCells = ["about", "help"]
+        }
+        self.tableView.reloadData()
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return menuCells.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        return self.tableView.dequeueReusableCellWithIdentifier(
+                menuCells[indexPath.row])!
+        
+    }
 
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -38,8 +56,10 @@ class LeftSideController: UITableViewController{
                 (_)in
                 let ref = Firebase(url: "https://mutirao.firebaseio.com")
                 ref.unauth()
-                self.performSegueWithIdentifier("unwindToLogin", sender: self)
-                
+                self.dismissViewControllerAnimated(true, completion: nil)
+                //self.navigationController?.popViewControllerAnimated(true)
+                //self.performSegueWithIdentifier("unwindToLogin", sender: self)
+//                Singleton.sharedInstance.mainController?.unw("toMenu", sender: self)
                 
                 
                 
