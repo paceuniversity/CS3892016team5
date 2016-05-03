@@ -50,8 +50,8 @@ class ProfileView: UIViewController, UIImagePickerControllerDelegate, UINavigati
                     self.nameText.text = snapshot.value.objectForKey("name") as? String
                     self.descText.text = snapshot.value.objectForKey("description") as? String
                     
-                }
                 
+                }
                 
                
         })
