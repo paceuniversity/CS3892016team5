@@ -29,6 +29,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var sharedInstance: Singleton!
     
     var selectedEvent: Event?
+    
+    var destination: MKMapItem = MKMapItem()
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +61,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func createPins() {
+        self.mapView.removeAnnotations(mapView.annotations)
         let  ref = Firebase(url:"https://mutirao.firebaseio.com/events")
         ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
             for child in snapshot.children {
@@ -80,6 +83,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     self.addPin(event)
                 });
             })
+        })
+        
+        ref.observeEventType(.ChildRemoved, withBlock: { snapshot in
+            let event = Event(snapshot: snapshot)
+            dispatch_async(dispatch_get_main_queue(), {
+                self.removePin(event)
+            });
+            
         })
     // Add any changes here that you want when the map appears
         
@@ -167,6 +178,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     
     func addPin(event: Event) {
+        
         locationManager.startUpdatingLocation()
         let location = CLLocation.init(latitude: event.lat, longitude: event.lon)
         let annotation = EventAnnotation(event: event)
@@ -182,6 +194,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.mapView.addAnnotation(annotation)
 
 
+    }
+    
+    func removePin(event: Event) {
+        
+        let pinAnnotation = self.mapView.annotations.filter({ annotation in
+            if let eventAnnotation = annotation as? EventAnnotation {
+                return eventAnnotation.event.id == event.id
+            }
+            return false
+        })
+        self.mapView.removeAnnotations(pinAnnotation)
     }
     
     
@@ -280,14 +303,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             self.performSegueWithIdentifier("loadEvent", sender: self)
         }
     }
-
     
-  
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-        
-        print("pin pressed")
-        
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let id = segue.identifier {

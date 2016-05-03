@@ -20,10 +20,13 @@ class Singleton{
     
     static let sharedInstance = Singleton()
     
-    var eventsArray = [Event]()
+    var events = [String: Event]()
     var delegates = [EventAddedDelegate]()
     var user: User? = nil
     var mainController: MapViewController?
+    var profileImage: UIImage?
+    var isloggedin = false
+
     
     
     private init(){
@@ -43,7 +46,7 @@ class Singleton{
         eventRef.observeSingleEventOfType(.Value, withBlock: { snapshot in
             for child in snapshot.children {
                 let newEvent = Event(snapshot: child as! FDataSnapshot)
-                self.eventsArray.append(newEvent)
+                self.events[snapshot.key] = newEvent
                 dispatch_async(dispatch_get_main_queue(), {
                     for delegate in self.delegates {
                         delegate.didAddEvent(newEvent)
@@ -51,7 +54,7 @@ class Singleton{
                 })
             }
             for delegate in self.delegates {
-                delegate.didEndAddingEvents(self.eventsArray)
+                delegate.didEndAddingEvents(self.events)
             }
             
             }, withCancelBlock: { error in
@@ -60,18 +63,29 @@ class Singleton{
         
         eventRef.observeEventType(.ChildAdded, withBlock: { snapshot in
             let newEvent = Event(snapshot: snapshot)
-            self.eventsArray.append(newEvent)
+            self.events[snapshot.key] = newEvent
             dispatch_async(dispatch_get_main_queue(), {
                 for delegate in self.delegates {
                     delegate.didAddEvent(newEvent)
-                    delegate.didEndAddingEvents(self.eventsArray)
+                    delegate.didEndAddingEvents(self.events)
                 }
             });
 
+        })
+        
+        eventRef.observeEventType(.ChildRemoved, withBlock: { snapshot in
+            self.events.removeValueForKey(snapshot.key)
+            dispatch_async(dispatch_get_main_queue(), {
+                for delegate in self.delegates {
+                    delegate.didEndAddingEvents(self.events)
+                }
+            });
+            
         })
 
         
         
     }
+    
     
 }

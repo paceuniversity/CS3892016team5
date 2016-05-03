@@ -55,6 +55,8 @@ class EventManagerViewController: UIViewController, UIImagePickerControllerDeleg
                 self.event?.address = self.addressField.text!
                 self.event?.name = self.nameField.text!
                 self.event?.creator = Singleton.sharedInstance.user!.id
+                Singleton.sharedInstance.user?.eventsCreated[self.event!.id] = true
+                Singleton.sharedInstance.user?.save()
                 if let image = self.imageView.image {
                     self.event?.picture = self.encodeImage(image)
                 }
@@ -68,6 +70,9 @@ class EventManagerViewController: UIViewController, UIImagePickerControllerDeleg
     
     
     @IBAction func editDescription(sender: AnyObject) {
+        
+        
+        
     }
 
     @IBAction func openLibrary(sender: AnyObject) {

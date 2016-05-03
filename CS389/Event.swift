@@ -11,7 +11,7 @@ import Firebase
 
 protocol EventAddedDelegate: class {
     func didAddEvent(event: Event)
-    func didEndAddingEvents(events: [Event])
+    func didEndAddingEvents(events: [String: Event])
 }
 
 
@@ -33,13 +33,17 @@ class Event: Model {
     
     func addAttendee(id: String) {
         let ref = Firebase(url: "\(Event.refUrl())\(self.id)/atendess/\(id)")
+        Singleton.sharedInstance.user?.eventsAttending[self.id] = true
+        Singleton.sharedInstance.user?.save()
         ref.setValue(true)
         
     }
     
     func removeAttendee(id: String) {
         let ref = Firebase(url: "\(Event.refUrl())\(self.id)/atendess/\(id)")
-        ref.removeValue();
+        Singleton.sharedInstance.user?.eventsAttending.removeValueForKey(self.id)
+        Singleton.sharedInstance.user?.save()
+        ref.removeValue()
         
     }
     
@@ -47,3 +51,4 @@ class Event: Model {
          return ["lat", "lon", "address", "name", "desc", "creator", "picture"]
     }
 }
+

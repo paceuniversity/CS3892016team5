@@ -34,21 +34,17 @@ class EventViewController: UIViewController, MKMapViewDelegate {
         locationManager.startUpdatingLocation()
         
         if let user = Singleton.sharedInstance.user {
-            let created = user.eventsCreated.filter({ event in
-                event.id == self.event?.id
-            })
-            if created.count > 0 {
+//            let created = user.eventsCreated.filter({ event in
+//                event.id == self.event?.id
+//            })
+            if user.eventsCreated[self.event!.id] != nil {
                 self.goButton.hidden = true
                 self.cancelButton.hidden = false
                 self.cancelButton.setTitle("Cancel Event", forState: .Normal)
                 self.cancelButton.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
                 self.cancelButton.addTarget(self, action: #selector(cancel(_:)), forControlEvents: .TouchUpInside)
             } else {
-                let attending = user.eventsAttending.filter({ event in
-                    event.id == self.event?.id
-                })
-                
-                if attending.count > 0 {
+               if user.eventsAttending[self.event!.id] != nil {
                     self.goButton.hidden = true
                     self.cancelButton.hidden = false
                     self.cancelButton.setTitle("Not Going", forState: .Normal)
@@ -115,14 +111,18 @@ class EventViewController: UIViewController, MKMapViewDelegate {
     @IBAction func go(sender: AnyObject) {
         event?.addAttendee(Singleton.sharedInstance.user!.id)
         self.navigationController?.popViewControllerAnimated(true)
+        
     }
     
     func cancel(sender: AnyObject) {
         self.event!.delete()
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     func dontGo(sender: AnyObject) {
         self.event!.removeAttendee(Singleton.sharedInstance.user!.id)
+        self.cancelButton.hidden = true
+        self.goButton.hidden = false
     }
 
     func addPin(event: Event) {

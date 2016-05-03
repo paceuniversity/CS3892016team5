@@ -31,8 +31,8 @@ class RightSideController: UITableViewController, EventAddedDelegate{
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if Singleton.sharedInstance.eventsArray.isEmpty == false{
-        return Singleton.sharedInstance.eventsArray.count
+        if Singleton.sharedInstance.events.isEmpty == false{
+        return Singleton.sharedInstance.events.values.count
     }
         else {
             
@@ -54,8 +54,8 @@ class RightSideController: UITableViewController, EventAddedDelegate{
             
             cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
         }
-        
-        cell.textLabel?.text = Singleton.sharedInstance.eventsArray[indexPath.row].name
+        let eventKey = Array(Singleton.sharedInstance.events.keys)[indexPath.row]
+        cell.textLabel?.text = Singleton.sharedInstance.events[eventKey]!.name
         return cell 
         
         
@@ -64,7 +64,9 @@ class RightSideController: UITableViewController, EventAddedDelegate{
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         rightTableView.deselectRowAtIndexPath(indexPath, animated: true)
-        delegate?.didSelectEvent(self, event: Singleton.sharedInstance.eventsArray[indexPath.row])
+        let eventKey = Array(Singleton.sharedInstance.events.keys)[indexPath.row]
+        let event = Singleton.sharedInstance.events[eventKey]
+        delegate?.didSelectEvent(self, event: event!)
     }
     
   
@@ -76,7 +78,6 @@ class RightSideController: UITableViewController, EventAddedDelegate{
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
             
             // Fill this part in to delete an event
-            Singleton.sharedInstance.eventsArray.removeAtIndex(indexPath.row)
             rightTableView.reloadData()
             
             
@@ -87,7 +88,7 @@ class RightSideController: UITableViewController, EventAddedDelegate{
         
     }
     
-    func didEndAddingEvents(events: [Event]) {
+    func didEndAddingEvents(events: [String: Event]) {
         self.tableView.reloadData()
     }
     

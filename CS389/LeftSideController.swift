@@ -57,11 +57,13 @@ class LeftSideController: UITableViewController{
                 let ref = Firebase(url: "https://mutirao.firebaseio.com")
                 ref.unauth()
                 self.dismissViewControllerAnimated(true, completion: nil)
-                //self.navigationController?.popViewControllerAnimated(true)
-                //self.performSegueWithIdentifier("unwindToLogin", sender: self)
-//                Singleton.sharedInstance.mainController?.unw("toMenu", sender: self)
                 
-                
+                let alert2 = UIAlertView()
+                alert2.title = "Logout"
+                alert2.message = "You Have Been Logged Out"
+                alert2.addButtonWithTitle("Ok")
+                alert2.show()
+   
                 
             })
             let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {

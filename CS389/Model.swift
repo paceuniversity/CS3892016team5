@@ -34,9 +34,10 @@ class Model: NSObject {
 
     
     func sync(snapshot: FDataSnapshot) {
+        self.id = snapshot.key
         for prop in self.syncProperties() {
             if snapshot.hasChild(prop) {
-                self.setValue(snapshot.childSnapshotForPath(prop).value, forKey: prop)
+                self.setValue(snapshot.childSnapshotForPath(prop), prop: prop)
             }
         }
     }
@@ -57,7 +58,6 @@ class Model: NSObject {
     
     func load(block: ((FDataSnapshot!) -> Void)!) {
         let ref = Firebase(url: "\(self.dynamicType.refUrl())\(id)")
-        
         ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
             self.sync(snapshot)
             block(snapshot)
@@ -79,7 +79,13 @@ class Model: NSObject {
         if new {
             ref.setValue(value)
         } else {
+            
             ref.updateChildValues(value)
         }
+    }
+    
+    
+    func setValue(snapshot: FDataSnapshot, prop:String) {
+        self.setValue(snapshot.value, forKey: prop)
     }
 }
