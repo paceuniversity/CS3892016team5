@@ -65,6 +65,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.viewWillAppear(animated)
         
         createMenu()
+        setUpSideMenu()
         
     }
     
@@ -104,6 +105,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
     }
+    
+    func setUpSideMenu(){
+        
+        let modes:[SideMenuManager.MenuPresentMode] = [.MenuSlideIn, .ViewSlideOut, .MenuDissolveIn]
+        
+        SideMenuManager.menuPresentMode = modes[1]
+        SideMenuManager.menuAnimationTransformScaleFactor = CGFloat(1)
+        SideMenuManager.menuFadeStatusBar = false
+        
+        
+    }
+    
+    
+    
     
     
     // Implement Expanding menu Cocoapod
