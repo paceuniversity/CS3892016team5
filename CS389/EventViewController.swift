@@ -109,8 +109,12 @@ class EventViewController: UIViewController, MKMapViewDelegate {
     
 
     @IBAction func go(sender: AnyObject) {
-        event?.addAttendee(Singleton.sharedInstance.user!.id)
-        self.navigationController?.popViewControllerAnimated(true)
+        if let user = Singleton.sharedInstance.user {
+            event?.addAttendee(user.id)
+            self.navigationController?.popViewControllerAnimated(true)
+        } else {
+            Singleton.sharedInstance.mainController?.performSegueWithIdentifier("login", sender: self)
+        }
         
     }
     
@@ -139,7 +143,7 @@ class EventViewController: UIViewController, MKMapViewDelegate {
         annotation.coordinate = locCoord
         annotation.title = event.name
         annotation.subtitle = event.address
-        
+        annotation.imageName = "pin.png"
         self.mapView.addAnnotation(annotation)
         
         
@@ -155,21 +159,18 @@ class EventViewController: UIViewController, MKMapViewDelegate {
         let reuseId = "reuse"
         
         
-        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
         
         if pinView == nil{
             
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             
             pinView!.annotation = annotation
-            
-            if #available(iOS 9.0, *) {
-                pinView!.pinTintColor = UIColor.orangeColor()
-            } else {
-                pinView?.pinColor = MKPinAnnotationColor.Red
-                
-            }
-            pinView!.animatesDrop = true
+            let ann = annotation as! EventAnnotation
+            let image = UIImage(named:ann.imageName!)
+            pinView!.image = image
+
+
             pinView!.canShowCallout = true
             pinView!.rightCalloutAccessoryView = UIButton(type: .InfoDark)
             
