@@ -226,6 +226,7 @@
 				34E9FA0D1C8E0E7B0067F058 /* Resources */,
 				1B4466A8689CAC3C8E83C17D /* Embed Pods Frameworks */,
 				40CC055116B7E793103A5F4F /* Copy Pods Resources */,
+				89134F2D1CD9A0FD004AB970 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -352,6 +353,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CS389/Pods-CS389-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		89134F2D1CD9A0FD004AB970 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}\"/Fabric/run a24010471ef27a141f9cd6fe966e0b491745bca2 a31733646b6c0489cc5c633139e935eace770e1519c23f650d7637d7a7f09a8d";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -485,10 +499,11 @@
 			baseConfigurationReference = 9445DE979F2609CCE61168C4 /* Pods-CS389.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = CS389/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Lazimi.CS389;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mutirao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -498,10 +513,11 @@
 			baseConfigurationReference = 4DBE8A01916A82FD841A8934 /* Pods-CS389.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = CS389/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Lazimi.CS389;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mutirao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
