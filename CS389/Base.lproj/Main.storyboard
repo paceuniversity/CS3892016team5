@@ -499,6 +499,9 @@ Brayan Kostiovchok
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="BG.png" translatesAutoresizingMaskIntoConstraints="NO" id="23x-yn-QHq">
+                                <rect key="frame" x="-20" y="-66" width="414" height="736"/>
+                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nome do evento" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4ML-Io-cLm">
                                 <rect key="frame" x="20" y="156" width="335" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -606,6 +609,9 @@ Brayan Kostiovchok
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nba-n6-Y4S">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="BG.png" translatesAutoresizingMaskIntoConstraints="NO" id="fBF-zH-gz2">
+                                        <rect key="frame" x="-20" y="-34" width="414" height="736"/>
+                                    </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nome do evento" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8HP-5k-EZb">
                                         <rect key="frame" x="20" y="152" width="335" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -708,8 +714,8 @@ Brayan Kostiovchok
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="aIn-GR-Dc5">
-                        <barButtonItem key="rightBarButtonItem" image="notifications" id="iqu-KO-XW2">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="iqu-KO-XW2">
+                            <color key="tintColor" red="0.49019607843137253" green="0.49019607843137253" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="share:" destination="Pa9-jT-OFx" id="866-J0-Zjg"/>
                             </connections>
