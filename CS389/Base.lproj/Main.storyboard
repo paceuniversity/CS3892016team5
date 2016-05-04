@@ -298,6 +298,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BHU-vA-DlF" id="kaB-DO-xjG"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jO6-rd-jGP">
                                 <rect key="frame" x="20" y="270" width="335" height="271"/>
@@ -310,6 +313,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BHU-vA-DlF" id="U3E-5Q-HNS"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -493,6 +499,9 @@ Brayan Kostiovchok
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="p8t-b3-Jta" id="IPj-tl-IMn"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="maR-zA-gES">
                                 <rect key="frame" x="20" y="181" width="335" height="1"/>
@@ -505,6 +514,9 @@ Brayan Kostiovchok
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="p8t-b3-Jta" id="CWq-0s-W08"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ucN-ZJ-JmX">
                                 <rect key="frame" x="20" y="212" width="335" height="1"/>
@@ -518,6 +530,9 @@ Brayan Kostiovchok
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="p8t-b3-Jta" id="usa-V8-LM2"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oEZ-JC-fSl">
                                 <rect key="frame" x="20" y="361" width="335" height="1"/>

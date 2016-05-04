@@ -297,9 +297,49 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
         if let annotation = view.annotation as? EventAnnotation {
-            self.selectedEvent = annotation.event
-            self.performSegueWithIdentifier("loadEvent", sender: self)
+            
+            let optionMenu = UIAlertController(title: "Options", message: "What would you like to do?" , preferredStyle: .ActionSheet)
+            
+            
+            let directionsAction = UIAlertAction(title: "Directions", style: .Default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                
+                let place = MKPlacemark(coordinate: view.annotation!.coordinate, addressDictionary: nil)
+                
+                let mapItem = MKMapItem(placemark: place)
+                
+                let options = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
+                
+                
+                mapItem.name = "Event"
+                mapItem.openInMapsWithLaunchOptions(options)
+
+            
+            })
+            
+            let eventInfo =  UIAlertAction(title: "Event Info", style: .Default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.selectedEvent = annotation.event
+                self.performSegueWithIdentifier("loadEvent", sender: self)
+
+                })
+            
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+                (alert: UIAlertAction!) -> Void in
+                
+            })
+            
+            
+            optionMenu.addAction(directionsAction)
+            optionMenu.addAction(eventInfo)
+            optionMenu.addAction(cancelAction)
+            
+            self.presentViewController(optionMenu, animated: true, completion: nil)
+            
+            
         }
     }
     
