@@ -17,12 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        // Keeps data cached in offline mode
         Firebase.defaultConfig().persistenceEnabled = true
 
         return true
     }
     
-    // Keeps data cached in offline mode
+    
     
     
 

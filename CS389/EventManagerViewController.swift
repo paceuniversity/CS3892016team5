@@ -74,6 +74,11 @@ class EventManagerViewController: UIViewController, UIImagePickerControllerDeleg
         
         
     }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
 
     @IBAction func openLibrary(sender: AnyObject) {
         let imagePicker = UIImagePickerController()

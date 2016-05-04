@@ -68,6 +68,10 @@ class ProfileView: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
     
     
     @IBAction func saveButton(sender: AnyObject) {
