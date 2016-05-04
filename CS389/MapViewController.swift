@@ -189,6 +189,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         annotation.coordinate = locCoord
         annotation.title = event.name
         annotation.subtitle = event.address
+        annotation.imageName = "pin.png"
         
         self.mapView.addAnnotation(annotation)
 
@@ -269,21 +270,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let reuseId = "reuse"
         
         
-        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
         
         if pinView == nil{
             
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             
             pinView!.annotation = annotation
-            
-            if #available(iOS 9.0, *) {
-                pinView!.pinTintColor = UIColor.orangeColor()
-            } else {
-                pinView?.pinColor = MKPinAnnotationColor.Red
-                
-            }
-            pinView!.animatesDrop = true
+            let ann = annotation as! EventAnnotation
+            let image = UIImage(named:ann.imageName!)
+            pinView!.image = image
+//            if #available(iOS 9.0, *) {
+//                pinView!.pinTintColor = UIColor.orangeColor()
+//            } else {
+//                pinView?.pinColor = MKPinAnnotationColor.Red
+//                
+//            }
             pinView!.canShowCallout = true
             pinView!.rightCalloutAccessoryView = UIButton(type: .InfoDark)
             

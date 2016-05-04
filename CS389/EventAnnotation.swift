@@ -16,6 +16,7 @@ class EventAnnotation: NSObject, MKAnnotation {
     // Title and subtitle for use by selection UI.
     var title: String?
     var subtitle: String?
+    var imageName: String?
     
     init(event: Event) {
         self.event = event
