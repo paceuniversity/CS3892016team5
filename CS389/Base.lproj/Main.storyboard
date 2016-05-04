@@ -299,8 +299,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="BG.png" translatesAutoresizingMaskIntoConstraints="NO" id="wNS-AD-aio">
-                                <rect key="frame" x="0.0" y="-37" width="375" height="699"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" image="BG.png" translatesAutoresizingMaskIntoConstraints="NO" id="wNS-AD-aio">
+                                <rect key="frame" x="0.0" y="-32" width="375" height="699"/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jO6-rd-jGP">
                                 <rect key="frame" x="27" y="259" width="320" height="135"/>
@@ -1000,7 +1000,7 @@ Brayan Kostiovchok
         <!--Ajuda-->
         <scene sceneID="pzo-sg-4Kv">
             <objects>
-                <viewController title="Ajuda" id="OJm-jV-36F" customClass="AboutMenu" customModule="CS389" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Ajuda" id="OJm-jV-36F" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tJR-Aq-Hlq"/>
                         <viewControllerLayoutGuide type="bottom" id="DUE-oL-NNP"/>
