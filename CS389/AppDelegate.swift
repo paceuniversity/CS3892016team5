@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Crashlytics
+import Fabric
 import Firebase
 
 @UIApplicationMain
@@ -17,8 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        // Keeps data cached in offline mode
+        Fabric.with([Crashlytics.self])
         Firebase.defaultConfig().persistenceEnabled = true
+        
 
         return true
     }
