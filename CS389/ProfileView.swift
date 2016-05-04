@@ -100,7 +100,7 @@ class ProfileView: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        imagePicker.allowsEditing = false
+        imagePicker.allowsEditing = true
         
         self.presentViewController(imagePicker, animated: true,
                                    completion: nil)
