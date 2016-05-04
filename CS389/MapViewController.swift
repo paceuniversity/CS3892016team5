@@ -8,13 +8,16 @@
 
 import UIKit
 import MapKit
+import Firebase
 
 //CocoaPods-------
 import SideMenu
 import ExpandingMenu
-//------------------
+//---------------
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+
+
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, EventManagerViewControllerDelegate, RightSideControllerDelegate {
     
     
     @IBOutlet var mapView: MKMapView!
@@ -22,28 +25,36 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     var locationManager = CLLocationManager()
-    var myPosition = CLLocationCoordinate2D()
-    var destination: MKMapItem = MKMapItem()
     
-    var address: String = ""
-    var annotation = MKPointAnnotation()
+    var sharedInstance: Singleton!
+    
+    var selectedEvent: Event?
+    
+    var destination: MKMapItem = MKMapItem()
    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        sharedInstance = Singleton.sharedInstance
+        sharedInstance.mainController = self
         mapView.delegate = self
         locationManager.delegate = self
         
-        
-        self.mapView.showsUserLocation = true
+        mapView.showsUserLocation = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        locationManager.requestWhenInUseAuthorization()
+        
+        locationManager.startUpdatingLocation()
+    
         
         mapView.showsPointsOfInterest = true
         if #available(iOS 9.0, *) {
             mapView.showsCompass = true
         }
         
-        createMenu()
+        
+        createPins()
         
 
 
@@ -61,6 +72,51 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        createMenu()
+        
+    }
+    
+    func createPins() {
+        self.mapView.removeAnnotations(mapView.annotations)
+        let  ref = Firebase(url:"https://mutirao.firebaseio.com/events")
+        ref.observeSingleEventOfType(.Value, withBlock: { snapshot in
+            for child in snapshot.children {
+                let event = Event(snapshot: child as! FDataSnapshot)
+                event.load({snapshot in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.addPin(event)
+                    });
+                })
+            }
+            }, withCancelBlock: { error in
+                print(error.description)
+        })
+        
+        ref.observeEventType(.ChildAdded, withBlock: { snapshot in
+            let event = Event(snapshot: snapshot)
+            event.load({snapshot in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.addPin(event)
+                });
+            })
+        })
+        
+        ref.observeEventType(.ChildRemoved, withBlock: { snapshot in
+            let event = Event(snapshot: snapshot)
+            dispatch_async(dispatch_get_main_queue(), {
+                self.removePin(event)
+            });
+            
+        })
+    // Add any changes here that you want when the map appears
+        
+        
+    }
+    
+    
     // Implement Expanding menu Cocoapod
     func createMenu(){
         
@@ -72,26 +128,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.view.addSubview(menuButton)
         
         
-        let item1 = ExpandingMenuItem(size: menuButtonSize, title: "Find Nearby", image: UIImage(named: "icplacewhite")!, highlightedImage: UIImage(named: "icplacewhite")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
+        let item2 = ExpandingMenuItem(size: menuButtonSize, title: nil, image: UIImage(named: "icaddlocationwhite")!, highlightedImage: UIImage(named: "icaddlocationwhite")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
             
             //To be completed
-            
-            
-            
-            
-        }
-        
-        let item2 = ExpandingMenuItem(size: menuButtonSize, title: "Add Pin", image: UIImage(named: "icaddlocationwhite")!, highlightedImage: UIImage(named: "icaddlocationwhite")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
-            
-            //To be completed
-            
-            self.addPin()
+            if Singleton.sharedInstance.user == nil {
+                self.performSegueWithIdentifier("login", sender: self)
+            } else {
+                self.performSegueWithIdentifier("showEventManager", sender: self)
+            }
             
             
         }
 
         
-        let item3 = ExpandingMenuItem(size: menuButtonSize, title: "My Location", image: UIImage(named: "mylocation")!, highlightedImage: UIImage(named: "mylocation")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
+        let item3 = ExpandingMenuItem(size: menuButtonSize, title: nil, image: UIImage(named: "mylocation")!, highlightedImage: UIImage(named: "mylocation")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
             
             // Complete
 
@@ -106,7 +156,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
         
         
-        menuButton.addMenuItems([item3, item2, item1])
+        menuButton.addMenuItems([item3, item2])
      //   menuButton.expandingDirection = .Top
         
         menuButton.willPresentMenuItems = { (menu) -> Void in
@@ -117,12 +167,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
          //   print("MenuItems dismissed.")
         }
         
-        item1.titleColor = UIColor.brownColor()
-        item2.titleColor = UIColor.brownColor()
-        item3.titleColor = UIColor.brownColor()
+      //  item1.titleColor = UIColor.brownColor()
+      //  item2.titleColor = UIColor.brownColor()
+      //  item3.titleColor = UIColor.brownColor()
+        
         
         menuButton.bottomViewColor = UIColor.clearColor()
         menuButton.bottomViewAlpha = 0.2
+        menuButton.allowSounds = false
+        
        
         
         
@@ -132,38 +185,37 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func stopUpdating(){
         locationManager.stopUpdatingLocation()
     }
+
     
-    
-    func addPin(){
-        
-        let overlays = self.mapView.overlays
-        self.mapView.removeOverlays(overlays)
-        
-        let location = locationManager.location
-        
+    func addPin(event: Event) {
         
         locationManager.startUpdatingLocation()
-        
+        let location = CLLocation.init(latitude: event.lat, longitude: event.lon)
+        let annotation = EventAnnotation(event: event)
         // Turn phone location into coordinates
-        let locCoord = CLLocationCoordinate2DMake(location!.coordinate.latitude, location!.coordinate.longitude)
+        let locCoord = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         
-        self.mapView.removeAnnotations(mapView.annotations)
+        // self.mapView.removeAnnotations(mapView.annotations)
         
         annotation.coordinate = locCoord
-        annotation.title = "Mutirão"
-        annotation.subtitle = address
- 
-    //    let placeMark = MKPlacemark(coordinate: locCoord, addressDictionary: nil)
-    //    destination = MKMapItem(placemark: placeMark)
+        annotation.title = event.name
+        annotation.subtitle = event.address
+        annotation.imageName = "pin.png"
         
-        
-        if location != nil{
         self.mapView.addAnnotation(annotation)
-        }
+
+
+    }
+    
+    func removePin(event: Event) {
         
-        
-        locationManager.stopUpdatingLocation()
-        
+        let pinAnnotation = self.mapView.annotations.filter({ annotation in
+            if let eventAnnotation = annotation as? EventAnnotation {
+                return eventAnnotation.event.id == event.id
+            }
+            return false
+        })
+        self.mapView.removeAnnotations(pinAnnotation)
     }
     
     
@@ -202,44 +254,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let location = locations.last
         
-        var placemark: CLPlacemark!
-        
-        //Reverse geocode function- complete
-        
-        CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)->Void in
-            if error == nil && placemarks!.count > 0 {
-                placemark = placemarks![0] as CLPlacemark
-                
-                    if placemark.subThoroughfare != nil {
-                        self.address = placemark.subThoroughfare! + " "
-                    }
-                    if placemark.thoroughfare != nil {
-                        self.address = self.address + placemark.thoroughfare! + " "
-                    }
-                    if placemark.postalCode != nil {
-                        self.address = self.address + placemark.postalCode! + ", "
-                    }
-                    if placemark.locality != nil {
-                        self.address = self.address + placemark.locality! + " "
-                    }
-                    if placemark.administrativeArea != nil {
-                        self.address = self.address + placemark.administrativeArea! + ", "
-                    }
-                    if placemark.country != nil {
-                        self.address = self.address + placemark.country!
-                    }
-            }
-        })
-        
-        
         let center = CLLocationCoordinate2DMake(location!.coordinate.latitude, location!.coordinate.longitude)
         
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
         
         
         self.mapView.setRegion(region, animated: true)
-        
-        
         
         
         self.locationManager.stopUpdatingLocation()
@@ -253,8 +273,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     func mapView (mapView: MKMapView,viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
-        //   let pinView: MKPinAnnotationView = MKPinAnnotationView()
-        
         if annotation is MKUserLocation{
             return nil
         }
@@ -263,21 +281,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let reuseId = "reuse"
         
         
-        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
         
         if pinView == nil{
             
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             
             pinView!.annotation = annotation
-            
-            if #available(iOS 9.0, *) {
-                pinView!.pinTintColor = UIColor.orangeColor()
-            } else {
-                pinView?.pinColor = MKPinAnnotationColor.Red
-                
-            }
-            pinView!.animatesDrop = true
+            let ann = annotation as! EventAnnotation
+            let image = UIImage(named:ann.imageName!)
+            pinView!.image = image
+//            if #available(iOS 9.0, *) {
+//                pinView!.pinTintColor = UIColor.orangeColor()
+//            } else {
+//                pinView?.pinColor = MKPinAnnotationColor.Red
+//                
+//            }
             pinView!.canShowCallout = true
             pinView!.rightCalloutAccessoryView = UIButton(type: .InfoDark)
             
@@ -292,40 +311,84 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
-        let optionMenu = UIAlertController(title: nil, message: address, preferredStyle: .ActionSheet)
-        
-        
-        let deleteAction = UIAlertAction(title: "Remove Pin", style: .Default, handler: {
-            (alert: UIAlertAction!) -> Void in
+        if let annotation = view.annotation as? EventAnnotation {
             
-            self.mapView.removeAnnotation(self.annotation)
+            let optionMenu = UIAlertController(title: "Options", message: "What would you like to do?" , preferredStyle: .ActionSheet)
             
             
-        })
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
-            (alert: UIAlertAction!) -> Void in
+            let directionsAction = UIAlertAction(title: "Directions", style: .Default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                
+                let place = MKPlacemark(coordinate: view.annotation!.coordinate, addressDictionary: nil)
+                
+                let mapItem = MKMapItem(placemark: place)
+                
+                let options = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
+                
+                
+                mapItem.name = "Event"
+                mapItem.openInMapsWithLaunchOptions(options)
+
             
-        })
+            })
+            
+            let eventInfo =  UIAlertAction(title: "Event Info", style: .Default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                self.selectedEvent = annotation.event
+                self.performSegueWithIdentifier("loadEvent", sender: self)
+
+                })
+            
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+                (alert: UIAlertAction!) -> Void in
+                
+            })
+            
+            
+            optionMenu.addAction(directionsAction)
+            optionMenu.addAction(eventInfo)
+            optionMenu.addAction(cancelAction)
+            
+            self.presentViewController(optionMenu, animated: true, completion: nil)
+            
+            
+        }
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let id = segue.identifier {
+            if id == "showEventManager" {
+                if let vc = segue.destinationViewController as? EventManagerViewController {
+                    vc.title = "Create an event"
+//                    vc.delegate = self
+                }
+            } else if id == "loadEvent" {
+                if let vc = segue.destinationViewController as? EventViewController {
+                    vc.event = self.selectedEvent
+                }
+            } else if id == "toEvents" {
+                if let vc = segue.destinationViewController as? RightSideController {
+                    vc.delegate = self
+                }
+            }
+            
         
+        }
+    }
+    
+    
+    func didManageFinishEditingEvent(manager: EventManagerViewController, event: Event) {
         
-        
-        optionMenu.addAction(deleteAction)
-        optionMenu.addAction(cancelAction)
-        
-        self.presentViewController(optionMenu, animated: true, completion: nil)
-        
-        
+    }
+    
+    func didSelectEvent(sender: RightSideController, event: Event) {
+        self.selectedEvent = event
+        self.performSegueWithIdentifier("loadEvent", sender: self)
     }
 
     
-  
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-        
-        print("pin pressed")
-        
-    }
+    
+}
 
-    
-    
-    }
