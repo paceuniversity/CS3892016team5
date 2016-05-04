@@ -312,7 +312,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="82q-x7-h6N">
-                                        <rect key="frame" x="0.0" y="29" width="329" height="106"/>
+                                        <rect key="frame" x="8" y="29" width="321" height="106"/>
                                         <color key="backgroundColor" red="0.58086726639999997" green="0.23460113590000001" blue="0.10927996449999999" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="126" id="VMO-pU-ht4"/>
