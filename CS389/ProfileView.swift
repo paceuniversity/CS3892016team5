@@ -19,6 +19,8 @@ class ProfileView: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     @IBOutlet weak var descText: UITextField!
     
+    @IBOutlet weak var mailText: UITextField!
+    
     
     
     override func viewDidLoad() {
@@ -27,30 +29,26 @@ class ProfileView: UIViewController, UIImagePickerControllerDelegate, UINavigati
         let ref = Firebase(url: "https://mutirao.firebaseio.com/users/\(Singleton.sharedInstance.user!.id)")
         
         self.profileImage.clipsToBounds = true
-        self.profileImage.layer.borderWidth = 2
-        self.profileImage.layer.zPosition = 2
+        self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+//        self.profileImage.layer.borderWidth = 2
+//        self.profileImage.layer.zPosition = 2
         self.profileImage.contentMode = UIViewContentMode.ScaleAspectFill
-        
-        self.profileImage.image = Singleton.sharedInstance.profileImage
-        
-       
         
             ref.observeEventType(.Value, withBlock: { snapshot in
                 
                 if snapshot.hasChild("picture") {
                     
                     let profileString = snapshot.value.objectForKey("picture") as! String
-                    let decodedData = NSData(base64EncodedString: profileString, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
-                    Singleton.sharedInstance.profileImage = UIImage(data: decodedData!)
-                    self.profileImage.image = Singleton.sharedInstance.profileImage
-
+                    if profileString != "" {
+                        let decodedData = NSData(base64EncodedString: profileString, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
+                        Singleton.sharedInstance.profileImage = UIImage(data: decodedData!)
+                        self.profileImage.image = Singleton.sharedInstance.profileImage
+                    }
                 }
                 
-                if snapshot.hasChild("name") || snapshot.hasChild("description"){
-                    self.nameText.text = snapshot.value.objectForKey("name") as? String
-                    self.descText.text = snapshot.value.objectForKey("description") as? String
-                    
-                }
+                self.nameText.text = snapshot.value.objectForKey("name") as? String
+                self.descText.text = snapshot.value.objectForKey("description") as? String
+                self.mailText.text = snapshot.value.objectForKey("email") as? String
                 
                 
                
@@ -78,7 +76,7 @@ class ProfileView: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         let ref = Firebase(url: "https://mutirao.firebaseio.com/users/\(Singleton.sharedInstance.user!.id)")
         
-        let profileStrings = ["name" : nameText.text!, "description" : descText.text!]
+        let profileStrings = ["name" : nameText.text!, "description" : descText.text!, "email": mailText.text!]
         
         if nameText != nil && descText != nil{
             
