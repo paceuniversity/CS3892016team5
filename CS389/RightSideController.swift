@@ -72,18 +72,6 @@ class RightSideController: UITableViewController, EventAddedDelegate{
   
     
     //MARK: - Tableview delegate methods
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        
-        if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            
-            // Fill this part in to delete an event
-            rightTableView.reloadData()
-            
-            
-        }
-    }
-    
     func didAddEvent(event: Event) {
         
     }
