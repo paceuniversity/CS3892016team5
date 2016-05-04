@@ -78,17 +78,17 @@ class ProfileView: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         let profileStrings = ["name" : nameText.text!, "description" : descText.text!, "email": mailText.text!]
         
-        if nameText != nil && descText != nil{
             
            ref.updateChildValues(profileStrings)
             
-        }
+            let alert = UIAlertView()
+            alert.title = "Action"
+            alert.message = "Information Updated!"
+            alert.addButtonWithTitle("Ok")
+            alert.show()
+            
         
-        let alert = UIAlertView()
-        alert.title = "Action"
-        alert.message = "Information Updated!"
-        alert.addButtonWithTitle("Ok")
-        alert.show()
+       
         
         
     }
