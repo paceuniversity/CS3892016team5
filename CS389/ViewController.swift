@@ -70,6 +70,10 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     @IBAction func logInAction(sender: AnyObject) {
         let ref = Firebase(url: "https://mutirao.firebaseio.com/2")
+        let alert = UIAlertView()
+        alert.title = "Error"
+        alert.addButtonWithTitle("Ok")
+      
         
         ref.authUser(self.userNameBox.text, password: self.passwordBox.text,
                      withCompletionBlock: { (error, auth) -> Void in
@@ -80,7 +84,39 @@ class ViewController: UIViewController, UITextFieldDelegate{
                         }
                         
                         else {
-                            print(error)
+                            
+                            if let errorCode = FAuthenticationError(rawValue: error.code){
+
+                                switch (errorCode) {
+                                    
+                                case .EmailTaken:
+                                    alert.message = "This email address already exists"
+                                    alert.show()
+                                
+                                case .InvalidEmail:
+                                    alert.message = "Invalid email address. Please enter a valid email"
+                                    alert.show()
+                                    
+                                case .InvalidPassword:
+                                    alert.message = "Invalid password. Please try again"
+                                    alert.show()
+                                    
+                                case .NetworkError:
+                                    alert.message = "No internet connection. Please try again later"
+                                    alert.show()
+                                    
+                                default:
+                                    
+                                    alert.message = "Unknown error. If error continues, please contact help"
+                                    alert.show()
+                    
+                                }
+ 
+                            }
+                            
+                            
+                            
+                            
                         }
         })
     }
@@ -118,6 +154,10 @@ class ViewController: UIViewController, UITextFieldDelegate{
             (_)in
             
             let ref = Firebase(url: "https://mutirao.firebaseio.com/users")
+            let alert = UIAlertView()
+            alert.title = "Error"
+            alert.addButtonWithTitle("Ok")
+            
             
             if createUserText.text != "" && createPasswordText.text != ""{
             
@@ -125,6 +165,36 @@ class ViewController: UIViewController, UITextFieldDelegate{
                 
                 if error != nil {
                     print(error.localizedDescription)
+                    
+                    if let errorCode = FAuthenticationError(rawValue: error.code){
+                        
+                        switch (errorCode) {
+                            
+                        case .EmailTaken:
+                            alert.message = "This email address already exists"
+                            alert.show()
+                            
+                        case .InvalidEmail:
+                            alert.message = "Invalid email address. Please enter a valid email"
+                            alert.show()
+                            
+                        case .InvalidPassword:
+                            alert.message = "Invalid password. Please try again"
+                            alert.show()
+                            
+                        case .NetworkError:
+                            alert.message = "No internet connection. Please try again later"
+                            alert.show()
+                            
+                        default:
+                            
+                            alert.message = "Unknown error. If error continues, please contact help"
+                            alert.show()
+                            
+                        }
+                    }
+                    
+
                 }
                 
                 else{
@@ -134,10 +204,48 @@ class ViewController: UIViewController, UITextFieldDelegate{
                         
                         let user = ["email": createUserText.text, "password": auth.provider, "picture": "", "last_location" : ""]
                         
-                        ref.childByAppendingPath(auth.uid).setValue(user)
-                        
+                        if error != nil{
+                            
+                            if let errorCode = FAuthenticationError(rawValue: error.code){
+                                
+                                switch (errorCode) {
+                                    
+                                case .EmailTaken:
+                                    alert.message = "This email address already exists"
+                                    alert.show()
+                                    
+                                case .InvalidEmail:
+                                    alert.message = "Invalid email address. Please enter a valid email"
+                                    alert.show()
+                                    
+                                case .InvalidPassword:
+                                    alert.message = "Invalid password. Please try again"
+                                    alert.show()
+                                    
+                                case .NetworkError:
+                                    alert.message = "No internet connection. Please try again later"
+                                    alert.show()
+                                    
+                                default:
+                                    
+                                    alert.message = "Unknown error. If error continues, please contact help"
+                                    alert.show()
+                                    
+                                }
+                            }
 
+                        }
                         
+                        else{
+                        
+                            ref.childByAppendingPath(auth.uid).setValue(user)
+                            let alert2 = UIAlertView()
+                            alert2.title = "Success!"
+                            alert2.message = "Account successfully created!"
+                            alert2.addButtonWithTitle("OK")
+                            alert2.show()
+                        
+                        }
                     })
                 }
                 
