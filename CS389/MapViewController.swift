@@ -53,11 +53,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             mapView.showsCompass = true
         }
         
-        createMenu()
+        
         createPins()
         
 
 
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        createMenu()
+        
     }
     
     func createPins() {
@@ -109,15 +117,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.view.addSubview(menuButton)
         
         
-        let item1 = ExpandingMenuItem(size: menuButtonSize, title: nil, image: UIImage(named: "icplacewhite")!, highlightedImage: UIImage(named: "icplacewhite")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
-            
-            //To be completed
-            
-            
-            
-            
-        }
-        
         let item2 = ExpandingMenuItem(size: menuButtonSize, title: nil, image: UIImage(named: "icaddlocationwhite")!, highlightedImage: UIImage(named: "icaddlocationwhite")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
             
             //To be completed
@@ -146,7 +145,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
         
         
-        menuButton.addMenuItems([item3, item2, item1])
+        menuButton.addMenuItems([item3, item2])
      //   menuButton.expandingDirection = .Top
         
         menuButton.willPresentMenuItems = { (menu) -> Void in

@@ -25,7 +25,8 @@ class LeftSideController: UITableViewController{
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
+        
         if Singleton.sharedInstance.user != nil {
             menuCells = ["profile", "about", "help", "logout"]
         } else {
